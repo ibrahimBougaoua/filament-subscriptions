@@ -3,6 +3,7 @@
 namespace IbrahimBougaoua\FilamentSubscription;
 
 use IbrahimBougaoua\FilamentSubscription\Commands\FilamentSubscriptionCommand;
+use IbrahimBougaoua\FilamentSubscription\Resources\PlanFeatureResource;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanResource;
 use Spatie\LaravelPackageTools\Package;
 use Filament\PluginServiceProvider;
@@ -11,6 +12,7 @@ class FilamentSubscriptionServiceProvider extends PluginServiceProvider
 {
     protected array $resources = [
         PlanResource::class,
+        PlanFeatureResource::class,
     ];
 
     public function packageBooted(): void

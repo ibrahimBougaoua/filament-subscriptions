@@ -15,6 +15,7 @@ class PlanFeature extends Model
         'name',
         'slug',
         'description',
+        'image',
         'value',
         'resettable_period',
         'resettable_interval',
@@ -22,4 +23,14 @@ class PlanFeature extends Model
         'status',
         'plan_id',
     ];
+    
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class,"plan_id");
+    }
+    
+    public function featureSubscriptionsUsage()
+    {
+        return $this->hasMany(PlanSubscriptionUsage::class,"feature_id");
+    }
 }

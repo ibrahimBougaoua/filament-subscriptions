@@ -52,6 +52,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description')->nullable();
+            $table->string('image')->nullable();
             $table->string('value');
             $table->smallInteger('resettable_period')->unsigned()->default(0);
             $table->string('resettable_interval')->default('month');

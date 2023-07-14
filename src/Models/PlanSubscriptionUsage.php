@@ -12,10 +12,10 @@ class PlanSubscriptionUsage extends Model
     protected $table = 'filament_plan_subscription_usage';
 
     protected $fillable = [
-        'feature_id',
         'used',
         'valid_until',
         'timezone',
         'subscription_id',
+        'feature_id',
     ];
 }
