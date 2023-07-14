@@ -2,12 +2,22 @@
 
 namespace IbrahimBougaoua\FilamentSubscription;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use IbrahimBougaoua\FilamentSubscription\Commands\FilamentSubscriptionCommand;
+use IbrahimBougaoua\FilamentSubscription\Resources\PlanResource;
+use Spatie\LaravelPackageTools\Package;
+use Filament\PluginServiceProvider;
 
-class FilamentSubscriptionServiceProvider extends PackageServiceProvider
+class FilamentSubscriptionServiceProvider extends PluginServiceProvider
 {
+    protected array $resources = [
+        PlanResource::class,
+    ];
+
+    public function packageBooted(): void
+    {
+        parent::packageBooted();
+    }
+
     public function configurePackage(Package $package): void
     {
         /*
@@ -19,7 +29,7 @@ class FilamentSubscriptionServiceProvider extends PackageServiceProvider
             ->name('filament-subscriptions')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_filament-subscriptions_table')
+            ->hasMigration('create_filament_subscriptions_table')
             ->hasCommand(FilamentSubscriptionCommand::class);
     }
 }

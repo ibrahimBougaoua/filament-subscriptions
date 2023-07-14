@@ -8,12 +8,107 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('filament_subscriptions_table', function (Blueprint $table) {
+        Schema::create('filament_currencies', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->string('name')->unique();
+            $table->string('icon')->nullable();
+            $table->string('code');
+            $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::create('filament_plans', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->string('description')->nullable();
+            $table->decimal('price')->default('0.00');
+            $table->string('image')->nullable();
+            $table->decimal('signup_fee')->default('0.00');
+            $table->smallInteger('trial_period')->unsigned()->default(0);
+            $table->string('trial_interval')->default('day');
+            $table->smallInteger('invoice_period')->unsigned()->default(0);
+            $table->string('invoice_interval')->default('month');
+            $table->smallInteger('grace_period')->unsigned()->default(0);
+            $table->string('grace_interval')->default('day');
+            $table->tinyInteger('prorate_day')->unsigned()->nullable();
+            $table->tinyInteger('prorate_period')->unsigned()->nullable();
+            $table->tinyInteger('prorate_extend_due')->unsigned()->nullable();
+            $table->smallInteger('active_subscribers_limit')->unsigned()->nullable();
+            $table->mediumInteger('sort_order')->unsigned()->default(0);
+            $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('currency_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
+
+            $table->foreign('currency_id')
+            ->references('id')->on('filament_currencies')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+        });
+
+        Schema::create('filament_plan_features', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->string('description')->nullable();
+            $table->string('value');
+            $table->smallInteger('resettable_period')->unsigned()->default(0);
+            $table->string('resettable_interval')->default('month');
+            $table->mediumInteger('sort_order')->unsigned()->default(0);
+            $table->unsignedBigInteger('plan_id')->unsigned();
+            $table->boolean('status')->default(true);
+            $table->softDeletes();
+            $table->timestamps();
+
+            $table->foreign('plan_id')
+            ->references('id')->on('filament_plans')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+        });
+
+        Schema::create('filament_plan_subscriptions', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->string('description')->nullable();
+            $table->dateTime('trial_ends_at')->nullable();
+            $table->dateTime('starts_at')->nullable();
+            $table->dateTime('ends_at')->nullable();
+            $table->dateTime('cancels_at')->nullable();
+            $table->dateTime('canceled_at')->nullable();
+            $table->string('timezone')->nullable();
+            $table->morphs('subscriber');
+            $table->unsignedBigInteger('plan_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
+
+            $table->foreign('plan_id')
+            ->references('id')
+            ->on('filament_plans')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+        });
+
+        Schema::create('filament_plan_subscription_usage', function (Blueprint $table) {
+            $table->id();
+            $table->smallInteger('used')->unsigned();
+            $table->dateTime('valid_until')->nullable();
+            $table->string('timezone')->nullable();
+            $table->unsignedBigInteger('subscription_id')->unsigned();
+            $table->unsignedBigInteger('feature_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
+
+            $table->foreign('subscription_id')
+            ->references('id')
+            ->on('filament_plan_subscriptions')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreign('feature_id')
+            ->references('id')
+            ->on('filament_plan_features')
+            ->onDelete('cascade')->onUpdate('cascade');
         });
     }
 };
