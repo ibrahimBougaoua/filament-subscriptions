@@ -84,22 +84,22 @@ class SubscriptionsOverview extends BaseWidget
         }
 
         return [
-            Card::make('To Day', $profit_today.' DA')
+            Card::make('To Day', $profit_today . config('filament-subscriptions.currency'))
                 ->description('Profit To Day')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->chart($profit_today_arr)
                 ->color('success'),
-            Card::make('Last Week', $profit_last_week.' DA')
+            Card::make('Last Week', $profit_last_week . config('filament-subscriptions.currency'))
                 ->description('Profit Last Week')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->chart($profit_last_week_arr)
                 ->color('success'),
-            Card::make('Last Month', $profit_last_month.' DA')
+            Card::make('Last Month', $profit_last_month . config('filament-subscriptions.currency'))
                 ->description('Profit Last Month')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->chart($profit_last_month_arr)
                 ->color('success'),
-            Card::make('Last Year', $profit_last_year.' DA')
+            Card::make('Last Year', $profit_last_year . config('filament-subscriptions.currency'))
                 ->description('Profit Last Year')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->chart($profit_last_year_arr)

@@ -14,7 +14,13 @@ class ListPlans extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Action::make('features')
+                ->label('Features')
+                ->url(route('filament.resources.features.index'))
+                ->color('success')
+                ->icon('heroicon-o-tag'),
+            Actions\CreateAction::make()
+                ->icon('heroicon-o-plus'),
         ];
     }
 }

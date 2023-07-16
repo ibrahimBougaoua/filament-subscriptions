@@ -14,7 +14,16 @@ class ManagePlanSubscriptions extends ManageRecords
     protected function getActions(): array
     {
         return [
-            
+            Action::make('plans')
+                ->label('Plans')
+                ->url(route('filament.resources.plans.index'))
+                ->color('success')
+                ->icon('heroicon-o-cube'),
+            Action::make('features')
+                ->label('Features')
+                ->url(route('filament.resources.features.index'))
+                ->color('success')
+                ->icon('heroicon-o-tag'),
         ];
     }
 

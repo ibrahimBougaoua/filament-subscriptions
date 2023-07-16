@@ -171,20 +171,6 @@ class PlanResource extends Resource
                         ->columnSpan([
                             'md' => 6,
                         ]),
-                        Forms\Components\Card::make()
-                        ->schema([
-                            Forms\Components\Placeholder::make('All Features'),
-                            CheckboxList::make('features')
-                            ->relationship('features', 'id')
-                            ->label('')
-                            ->options(
-                                Feature::pluck('name','id')->toArray()
-                            )
-                            ->columns(3)
-                            ->columnSpan([
-                                'md' => 12,
-                            ]),
-                        ]),
                         MarkdownEditor::make('description')
                         ->label(__('panel.description'))
                         ->columnSpan([
@@ -192,6 +178,25 @@ class PlanResource extends Resource
                         ]),
                         FileUpload::make('image')
                         ->label(__('panel.image'))
+                        ->columnSpan([
+                            'md' => 12,
+                        ]),
+                    ])
+                    ->columns([
+                        'md' => 12,
+                    ])
+                    ->columnSpan('full'),
+                    
+                    Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\Placeholder::make('All Features'),
+                        CheckboxList::make('features')
+                        ->relationship('features', 'id')
+                        ->label('')
+                        ->options(
+                            Feature::pluck('name','id')->toArray()
+                        )
+                        ->columns(3)
                         ->columnSpan([
                             'md' => 12,
                         ]),

@@ -2,5 +2,5 @@
 
 // config for IbrahimBougaoua/FilamentSubscription
 return [
-    'currency' => 'DA',
+    'currency' => ' DA',
 ];

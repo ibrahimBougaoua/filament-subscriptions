@@ -3,6 +3,7 @@
 namespace IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource\Pages;
 
 use Filament\Pages\Actions;
+use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource;
 
@@ -13,7 +14,13 @@ class EditFeature extends EditRecord
     protected function getActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Action::make('features')
+                ->label('Features')
+                ->url(route('filament.resources.features.index'))
+                ->color('success')
+                ->icon('heroicon-o-tag'),
+            Actions\DeleteAction::make()
+                ->icon('heroicon-o-trash'),
         ];
     }
 }
