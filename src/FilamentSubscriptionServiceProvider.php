@@ -7,6 +7,7 @@ use IbrahimBougaoua\FilamentSubscription\Commands\FilamentSubscriptionCommand;
 use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanResource;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource;
+use IbrahimBougaoua\FilamentSubscription\Widgets\SubscriptionsOverview;
 use Spatie\LaravelPackageTools\Package;
 use Filament\PluginServiceProvider;
 
@@ -16,6 +17,10 @@ class FilamentSubscriptionServiceProvider extends PluginServiceProvider
         PlanResource::class,
         FeatureResource::class,
         PlanSubscriptionsResource::class,
+    ];
+
+    protected array $widgets = [
+        SubscriptionsOverview::class,
     ];
 
     public function packageBooted(): void

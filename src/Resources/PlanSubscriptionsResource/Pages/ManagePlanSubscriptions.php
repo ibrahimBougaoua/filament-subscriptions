@@ -5,6 +5,7 @@ namespace IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResour
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\ManageRecords;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource;
+use IbrahimBougaoua\FilamentSubscription\Widgets\SubscriptionsOverview;
 
 class ManagePlanSubscriptions extends ManageRecords
 {
@@ -16,4 +17,12 @@ class ManagePlanSubscriptions extends ManageRecords
             
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            SubscriptionsOverview::class,
+        ];
+    }
+
 }

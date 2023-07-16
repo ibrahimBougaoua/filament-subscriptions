@@ -86,12 +86,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description')->nullable();
+            $table->decimal('price')->default('0.00');
             $table->dateTime('trial_ends_at')->nullable();
             $table->dateTime('starts_at')->nullable();
             $table->dateTime('ends_at')->nullable();
             $table->dateTime('cancels_at')->nullable();
             $table->dateTime('canceled_at')->nullable();
             $table->string('timezone')->nullable();
+            $table->boolean('is_paid')->default(false);
             $table->morphs('subscriber');
             $table->unsignedBigInteger('plan_id')->unsigned();
             $table->softDeletes();

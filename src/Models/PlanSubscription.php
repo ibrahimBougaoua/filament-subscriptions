@@ -16,12 +16,14 @@ class PlanSubscription extends Model
         'name',
         'slug',
         'description',
+        'price',
         'trial_ends_at',
         'starts_at',
         'ends_at',
         'cancels_at',
         'canceled_at',
         'timezone',
+        'is_paid',
         'plan_id',
     ];
 

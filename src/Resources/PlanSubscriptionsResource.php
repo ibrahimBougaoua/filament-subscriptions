@@ -5,6 +5,8 @@ namespace IbrahimBougaoua\FilamentSubscription\Resources;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\SelectFilter;
 use IbrahimBougaoua\FilamentSubscription\Models\PlanSubscription;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource\Pages;
 use Filament\Forms;
@@ -109,20 +111,22 @@ class PlanSubscriptionsResource extends Resource
                 BadgeColumn::make('ends_at')
                 ->label('Ends At')
                 ->colors(['danger']),
-                BadgeColumn::make('cancels_at')
-                ->label('Cancels At')
-                ->colors(['danger']),
-                BadgeColumn::make('canceled_at')
-                ->label('Canceled At')
-                ->colors(['danger']),
                 BadgeColumn::make('subscriber.name')
                 ->colors(['secondary'])
                 ->label('Subscriber'),
+                ToggleColumn::make('is_paid')
+                ->label('Unpaid/Paid'),
                 BadgeColumn::make('created_at')
                 ->label('Created at')
                 ->colors(['success'])
             ])
             ->filters([
+                SelectFilter::make('is_paid')
+                    ->label('Unpaid/Paid')
+                    ->options([
+                    '1' => 'Paid',
+                    '0' => 'Unpaid',
+                ]),
                 Tables\Filters\Filter::make('created_at')
                 ->label('Created at')->form([
                     Forms\Components\DatePicker::make('created_from')->label('Created from'),
