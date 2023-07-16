@@ -4,6 +4,7 @@ namespace IbrahimBougaoua\FilamentSubscription\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class PlanSubscription extends Model
 {
@@ -21,7 +22,11 @@ class PlanSubscription extends Model
         'cancels_at',
         'canceled_at',
         'timezone',
-        'subscriber',
         'plan_id',
     ];
+
+    public function subscriber() : MorphTo
+    {
+        return $this->morphTo('subscriber', 'subscriber_type' ,'subscriber_id', 'id');
+    }
 }

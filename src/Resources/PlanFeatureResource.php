@@ -29,7 +29,11 @@ class PlanFeatureResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'Location';
+    protected static ?string $navigationGroup = 'Plans';
+
+    protected static ?string $navigationLabel = 'Plan Features';
+
+    protected static ?string $pluralLabel = 'Plan Features';
 
     public static function form(Form $form): Form
     {
@@ -124,10 +128,6 @@ class PlanFeatureResource extends Resource
                 ->label('Plan')
                 ->sortable()
                 ->searchable(),
-                TextColumn::make('feature_subscriptions_usage_count')
-                ->counts('featureSubscriptionsUsage')
-                ->label('Usage')
-                ->sortable(),
                 TextColumn::make('resettable_period')
                 ->label('Resettable Period'),
                 TextColumn::make('resettable_interval')

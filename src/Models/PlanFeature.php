@@ -28,9 +28,4 @@ class PlanFeature extends Model
     {
         return $this->belongsTo(Plan::class,"plan_id");
     }
-    
-    public function featureSubscriptionsUsage()
-    {
-        return $this->hasMany(PlanSubscriptionUsage::class,"feature_id");
-    }
 }

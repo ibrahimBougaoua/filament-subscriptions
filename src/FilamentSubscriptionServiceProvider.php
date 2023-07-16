@@ -2,9 +2,11 @@
 
 namespace IbrahimBougaoua\FilamentSubscription;
 
+use App\Models\User;
 use IbrahimBougaoua\FilamentSubscription\Commands\FilamentSubscriptionCommand;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanFeatureResource;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanResource;
+use IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource;
 use Spatie\LaravelPackageTools\Package;
 use Filament\PluginServiceProvider;
 
@@ -13,11 +15,15 @@ class FilamentSubscriptionServiceProvider extends PluginServiceProvider
     protected array $resources = [
         PlanResource::class,
         PlanFeatureResource::class,
+        PlanSubscriptionsResource::class,
     ];
 
     public function packageBooted(): void
     {
         parent::packageBooted();
+
+        //$user = User::find(1);
+        //$user->newSubscription('Test','test','Test','2023-07-15 18:55:38.000000','2023-07-15 18:55:38.000000','2023-07-15 18:55:38.000000','2023-07-15 18:55:38.000000','2023-07-15 18:55:38.000000','',1);
     }
 
     public function configurePackage(Package $package): void

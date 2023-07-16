@@ -90,26 +90,5 @@ return new class extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });
-
-        Schema::create('filament_plan_subscription_usage', function (Blueprint $table) {
-            $table->id();
-            $table->smallInteger('used')->unsigned();
-            $table->dateTime('valid_until')->nullable();
-            $table->string('timezone')->nullable();
-            $table->unsignedBigInteger('subscription_id')->unsigned();
-            $table->unsignedBigInteger('feature_id')->unsigned();
-            $table->softDeletes();
-            $table->timestamps();
-
-            $table->foreign('subscription_id')
-            ->references('id')
-            ->on('filament_plan_subscriptions')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
-            $table->foreign('feature_id')
-            ->references('id')
-            ->on('filament_plan_features')
-            ->onDelete('cascade')->onUpdate('cascade');
-        });
     }
 };
