@@ -26,6 +26,16 @@ class PlanSubscriptionsResource extends Resource
 
     protected static ?string $pluralLabel = 'Subscriptions';
 
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    
+    protected static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() > 0 ? 'success' : 'danger';
+    }
+
     public static function canCreate(): bool
     {
         return false;

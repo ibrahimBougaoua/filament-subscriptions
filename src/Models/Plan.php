@@ -4,6 +4,7 @@ namespace IbrahimBougaoua\FilamentSubscription\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Plan extends Model
 {
@@ -33,9 +34,9 @@ class Plan extends Model
         'currency_id'
     ];
     
-    public function features()
+    public function features() : BelongsToMany
     {
-        return $this->hasMany(PlanFeature::class,"plan_id");
+        return $this->belongsToMany(Feature::class,'filament_plan_features');
     }
 
     public function subscriptions()

@@ -47,7 +47,7 @@ return new class extends Migration
             ->onUpdate('cascade');
         });
 
-        Schema::create('filament_plan_features', function (Blueprint $table) {
+        Schema::create('filament_features', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug');
@@ -56,11 +56,24 @@ return new class extends Migration
             $table->string('value');
             $table->smallInteger('resettable_period')->unsigned()->default(0);
             $table->string('resettable_interval')->default('month');
-            $table->mediumInteger('sort_order')->unsigned()->default(0);
-            $table->unsignedBigInteger('plan_id')->unsigned();
             $table->boolean('status')->default(true);
             $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::create('filament_plan_features', function (Blueprint $table) {
+            $table->id();
+            $table->mediumInteger('sort_order')->unsigned()->default(0);
+            $table->boolean('status')->default(true);
+            $table->unsignedBigInteger('feature_id')->unsigned();
+            $table->unsignedBigInteger('plan_id')->unsigned();
+            $table->softDeletes();
+            $table->timestamps();
+
+            $table->foreign('feature_id')
+            ->references('id')->on('filament_features')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
 
             $table->foreign('plan_id')
             ->references('id')->on('filament_plans')

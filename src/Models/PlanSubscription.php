@@ -29,4 +29,9 @@ class PlanSubscription extends Model
     {
         return $this->morphTo('subscriber', 'subscriber_type' ,'subscriber_id', 'id');
     }
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class,'plan_id');
+    }
 }

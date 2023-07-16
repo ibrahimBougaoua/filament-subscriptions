@@ -4,7 +4,7 @@ namespace IbrahimBougaoua\FilamentSubscription;
 
 use App\Models\User;
 use IbrahimBougaoua\FilamentSubscription\Commands\FilamentSubscriptionCommand;
-use IbrahimBougaoua\FilamentSubscription\Resources\PlanFeatureResource;
+use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanResource;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource;
 use Spatie\LaravelPackageTools\Package;
@@ -14,7 +14,7 @@ class FilamentSubscriptionServiceProvider extends PluginServiceProvider
 {
     protected array $resources = [
         PlanResource::class,
-        PlanFeatureResource::class,
+        FeatureResource::class,
         PlanSubscriptionsResource::class,
     ];
 

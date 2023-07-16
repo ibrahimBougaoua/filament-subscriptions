@@ -3,7 +3,6 @@
 namespace IbrahimBougaoua\FilamentSubscription\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Select;
@@ -19,23 +18,21 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use IbrahimBougaoua\FilamentSubscription\Models\Feature;
-use IbrahimBougaoua\FilamentSubscription\Models\Plan;
-use IbrahimBougaoua\FilamentSubscription\Models\Currency;
-use IbrahimBougaoua\FilamentSubscription\Resources\PlanResource\Pages;
+use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource\Pages;
 use Illuminate\Database\Eloquent\Builder;
 use Str;
 
-class PlanResource extends Resource
+class FeatureResource extends Resource
 {
-    protected static ?string $model = Plan::class;
+    protected static ?string $model = Feature::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationGroup = 'Plans';
 
-    protected static ?string $navigationLabel = 'Plans';
+    protected static ?string $navigationLabel = 'Features';
 
-    protected static ?string $pluralLabel = 'Plans';
+    protected static ?string $pluralLabel = 'Features';
 
     protected static function getNavigationBadge(): ?string
     {
@@ -68,97 +65,26 @@ class PlanResource extends Resource
                         ->columnSpan([
                             'md' => 6,
                         ]),
-                        Select::make('currency_id')->label('Currency')
-                        ->reactive()
-                        ->required()
-                        ->options(Currency::all()
-                        ->pluck('name', 'id')
-                        ->toArray())
-                        ->searchable()
+                        TextInput::make('value')
+                        ->label('value')
                         ->columnSpan([
                             'md' => 6,
                         ]),
-                        TextInput::make('price')
-                        ->label('price')
+                        TextInput::make('resettable_period')
+                        ->label('resettable_period')
                         ->numeric()
+                        ->default(10)
                         ->columnSpan([
                             'md' => 6,
                         ]),
-                        TextInput::make('signup_fee')
-                        ->label('signup_fee')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('trial_period')
-                        ->label('trial_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        Select::make('trial_interval')
-                        ->label('trial_interval')
+                        Select::make('resettable_interval')
+                        ->label('resettable_interval')
                         ->options([
                             'month' => 'Month',
                             'day' => 'Day',
                             'year' => 'Year',
                         ])
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('invoice_period')
-                        ->label('invoice_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        Select::make('invoice_interval')
-                        ->label('invoice_interval')
-                        ->options([
-                            'month' => 'Month',
-                            'day' => 'Day',
-                            'year' => 'Year',
-                        ])
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('grace_period')
-                        ->label('grace_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        Select::make('grace_interval')
-                        ->label('grace_interval')
-                        ->options([
-                            'month' => 'Month',
-                            'day' => 'Day',
-                            'year' => 'Year',
-                        ])
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('prorate_day')
-                        ->label('prorate_day')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('prorate_period')
-                        ->label('prorate_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('prorate_extend_due')
-                        ->label('prorate_extend_due')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('active_subscribers_limit')
-                        ->label('active_subscribers_limit')
-                        ->numeric()
+                        ->default('month')
                         ->columnSpan([
                             'md' => 6,
                         ]),
@@ -166,32 +92,15 @@ class PlanResource extends Resource
                         ->options([
                             '1' => 'Active',
                             '0' => 'Inactive',
-                        ])->default('1')
-                        ->disablePlaceholderSelection()
+                        ])->default('1')->disablePlaceholderSelection()
                         ->columnSpan([
                             'md' => 6,
                         ]),
-                        Forms\Components\Card::make()
-                        ->schema([
-                            Forms\Components\Placeholder::make('All Features'),
-                            CheckboxList::make('features')
-                            ->relationship('features', 'id')
-                            ->label('')
-                            ->options(
-                                Feature::pluck('name','id')->toArray()
-                            )
-                            ->columns(3)
-                            ->columnSpan([
-                                'md' => 12,
-                            ]),
-                        ]),
-                        MarkdownEditor::make('description')
-                        ->label(__('panel.description'))
+                        MarkdownEditor::make('description')->label(__('panel.description'))
                         ->columnSpan([
                             'md' => 12,
                         ]),
-                        FileUpload::make('image')
-                        ->label(__('panel.image'))
+                        FileUpload::make('image')->label(__('panel.image'))
                         ->columnSpan([
                             'md' => 12,
                         ]),
@@ -215,28 +124,19 @@ class PlanResource extends Resource
                 ->icon('heroicon-o-document-text')
                 ->sortable()
                 ->searchable(),
-                TextColumn::make('price')
-                ->label('Price')
-                ->sortable()
-                ->searchable(),
-                BadgeColumn::make('features_count')
-                ->label('Features')
+                BadgeColumn::make('plans_count')
+                ->label('Plans')
                 ->color(static function ($state): string {
                     if ($state === 0) {
                         return 'danger';
                     }
                     return 'success';
                 })
-                ->counts('features'),
-                BadgeColumn::make('subscriptions_count')
-                ->label('Subscriptions')
-                ->color(static function ($state): string {
-                    if ($state === 0) {
-                        return 'danger';
-                    }
-                    return 'success';
-                })
-                ->counts('subscriptions'),
+                ->counts('plans'),
+                TextColumn::make('resettable_period')
+                ->label('Resettable Period'),
+                TextColumn::make('resettable_interval')
+                ->label('Resettable Interval'),
                 IconColumn::make('status')
                 ->label('Status')->boolean()
                 ->trueIcon('heroicon-o-badge-check')
@@ -286,9 +186,9 @@ class PlanResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPlans::route('/'),
-            'create' => Pages\CreatePlan::route('/create'),
-            'edit' => Pages\EditPlan::route('/{record}/edit'),
+            'index' => Pages\ListFeatures::route('/'),
+            'create' => Pages\CreateFeature::route('/create'),
+            'edit' => Pages\EditFeature::route('/{record}/edit'),
         ];
     }
 }
