@@ -2,7 +2,7 @@
 
 namespace IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource\Pages;
 
-use App\Models\Domain;
+use IbrahimBougaoua\FilamentSubscription\Models\PlanSubscription;
 use Carbon\Carbon;
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\ManageRecords;
@@ -32,7 +32,7 @@ class ManagePlanSubscriptions extends ManageRecords
 
     protected function getTableQuery(): Builder
     {
-        return Domain::query()->whereMonth('created_at',Carbon::now()->month)->latest()->limit(1);
+        return PlanSubscription::query()->latest();
     }
 
     protected function getHeaderWidgets(): array
@@ -41,5 +41,4 @@ class ManagePlanSubscriptions extends ManageRecords
             SubscriptionsOverview::class,
         ];
     }
-
 }

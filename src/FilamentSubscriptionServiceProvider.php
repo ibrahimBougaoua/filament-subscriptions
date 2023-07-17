@@ -14,6 +14,14 @@ use Filament\PluginServiceProvider;
 
 class FilamentSubscriptionServiceProvider extends PluginServiceProvider
 {
+    protected array $styles = [
+        'tailwindcss-styles' => __DIR__ . '/../dist/css/style.css',
+    ];
+
+    protected array $scripts = [
+        //'tailwindcss-scripts' => __DIR__ . '/../dist/js/tailwindcss.js',
+    ];
+
     protected array $resources = [
         PlanResource::class,
         FeatureResource::class,

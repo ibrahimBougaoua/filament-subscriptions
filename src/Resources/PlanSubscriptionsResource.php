@@ -4,7 +4,6 @@ namespace IbrahimBougaoua\FilamentSubscription\Resources;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\BadgeColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
 use IbrahimBougaoua\FilamentSubscription\Models\PlanSubscription;
