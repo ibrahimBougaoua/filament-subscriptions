@@ -33,7 +33,7 @@ class Plan extends Model
         'status',
         'currency_id'
     ];
-    
+
     public function features() : BelongsToMany
     {
         return $this->belongsToMany(Feature::class,'filament_plan_features');

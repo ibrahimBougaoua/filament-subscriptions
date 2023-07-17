@@ -24,9 +24,9 @@ class PlanSubscriptionsResource extends Resource
 
     protected static ?string $navigationGroup = 'Plans';
 
-    protected static ?string $navigationLabel = 'Subscriptions';
+    protected static ?string $navigationLabel = 'Subscribed User Plans';
 
-    protected static ?string $pluralLabel = 'Subscriptions';
+    protected static ?string $pluralLabel = 'Subscribed User Plans';
 
     protected static function getNavigationBadge(): ?string
     {
@@ -97,11 +97,18 @@ class PlanSubscriptionsResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                ->label('Name')
-                ->icon('heroicon-o-document-text')
-                ->sortable()
+                BadgeColumn::make('subscriber.name')
+                ->colors(['secondary'])
+                ->limit(8)
+                ->label('Subscriber'),
+                BadgeColumn::make('name')
+                ->label('Plan')
+                ->colors(['primary'])
                 ->searchable(),
+                BadgeColumn::make('price')
+                ->label('Price')
+                ->suffix(config('filament-subscriptions.currency'))
+                ->colors(['success']),
                 BadgeColumn::make('trial_ends_at')
                 ->label('Trial Ends At')
                 ->colors(['secondary']),
@@ -111,9 +118,6 @@ class PlanSubscriptionsResource extends Resource
                 BadgeColumn::make('ends_at')
                 ->label('Ends At')
                 ->colors(['danger']),
-                BadgeColumn::make('subscriber.name')
-                ->colors(['secondary'])
-                ->label('Subscriber'),
                 ToggleColumn::make('is_paid')
                 ->label('Unpaid/Paid'),
                 BadgeColumn::make('created_at')

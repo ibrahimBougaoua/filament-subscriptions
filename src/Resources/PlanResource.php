@@ -250,10 +250,11 @@ class PlanResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('status')
-                    ->label('Status')->options([
-                    '1' => 'Active',
-                    '0' => 'Inactive',
-                ]),
+                    ->label('Status')
+                    ->options([
+                        '1' => 'Active',
+                        '0' => 'Inactive',
+                    ]),
                 Filter::make('created_at')
                     ->label(__('panel.created_at'))->form([
                     Forms\Components\DatePicker::make('created_from')->label('Created from'),

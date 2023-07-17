@@ -84,8 +84,8 @@ class SubscriptionsOverview extends BaseWidget
         }
 
         return [
-            Card::make('To Day', $profit_today . config('filament-subscriptions.currency'))
-                ->description('Profit To Day')
+            Card::make('Today', $profit_today . config('filament-subscriptions.currency'))
+                ->description('Profit Today')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->chart($profit_today_arr)
                 ->color('success'),

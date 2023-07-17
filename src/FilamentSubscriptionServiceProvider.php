@@ -2,7 +2,8 @@
 
 namespace IbrahimBougaoua\FilamentSubscription;
 
-use App\Models\User;
+use IbrahimBougaoua\FilamentSubscription\Pages\ManageSubscriptionPage;
+use IbrahimBougaoua\FilamentSubscription\Pages\PlansPage;
 use IbrahimBougaoua\FilamentSubscription\Commands\FilamentSubscriptionCommand;
 use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanResource;
@@ -17,6 +18,11 @@ class FilamentSubscriptionServiceProvider extends PluginServiceProvider
         PlanResource::class,
         FeatureResource::class,
         PlanSubscriptionsResource::class,
+    ];
+
+    protected array $pages = [
+        ManageSubscriptionPage::class,
+        PlansPage::class,
     ];
 
     protected array $widgets = [

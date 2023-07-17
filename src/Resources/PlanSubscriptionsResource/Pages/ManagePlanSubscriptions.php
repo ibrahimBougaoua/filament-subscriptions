@@ -2,10 +2,13 @@
 
 namespace IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource\Pages;
 
+use App\Models\Domain;
+use Carbon\Carbon;
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\ManageRecords;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource;
 use IbrahimBougaoua\FilamentSubscription\Widgets\SubscriptionsOverview;
+use Illuminate\Database\Eloquent\Builder;
 
 class ManagePlanSubscriptions extends ManageRecords
 {
@@ -25,6 +28,11 @@ class ManagePlanSubscriptions extends ManageRecords
                 ->color('success')
                 ->icon('heroicon-o-tag'),
         ];
+    }
+
+    protected function getTableQuery(): Builder
+    {
+        return Domain::query()->whereMonth('created_at',Carbon::now()->month)->latest()->limit(1);
     }
 
     protected function getHeaderWidgets(): array

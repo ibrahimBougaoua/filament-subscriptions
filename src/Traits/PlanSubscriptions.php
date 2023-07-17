@@ -1,6 +1,8 @@
 <?php
 
 namespace IbrahimBougaoua\FilamentSubscription\Traits;
+use IbrahimBougaoua\FilamentSubscription\Models\Feature;
+use IbrahimBougaoua\FilamentSubscription\Models\PlanFeature;
 use IbrahimBougaoua\FilamentSubscription\Models\PlanSubscription;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -25,5 +27,21 @@ trait PlanSubscriptions {
             'timezone' => '',
             'plan_id' => 1,
         ]);
+    }
+
+    public function hasSubscribedTo($plan_id) : bool
+    {
+        $subscription = $this->planSubscriptions()->where('plan_id',$plan_id)->first();
+        if( $subscription )
+            return true;
+        return false;
+    }
+
+    public function hasFeature($plan_id,$feature_id) : bool
+    {
+        $feature = PlanFeature::where('plan_id',$plan_id)->where('feature_id',$feature_id)->first();
+        if( $feature )
+            return true;
+        return false;
     }
 }

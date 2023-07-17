@@ -4,6 +4,7 @@ namespace IbrahimBougaoua\FilamentSubscription\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Feature extends Model
@@ -26,5 +27,10 @@ class Feature extends Model
     public function plans() : BelongsToMany
     {
         return $this->belongsToMany(Plan::class,"filament_plan_features");
+    }
+
+    public function belongsToPlan() : BelongsTo
+    {
+        return $this->belongsTo(Plan::class,"filament_plan_features");
     }
 }
