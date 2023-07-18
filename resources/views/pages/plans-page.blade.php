@@ -1,12 +1,12 @@
 <x-filament::page>
-    <div class="flex flex-row gap-4">
+    <div class="grid gap-8 sm:grid-cols-2 xl:grid-cols-5 sm:gap-y-16 xl:col-span-2">
         @foreach ($plans as $plan)
             <div @class([
-                'sm:w-1/2 md:w-1/2 lg:w-1/4 px-4 py-4  mt-6 shadow-lg rounded-lg',
+                'gap-x-6 sm:w-1/2 lg:w-1/3 w-full p-3 rounded-xl hover:scale-105 duration-500',
                 'bg-success-500' => auth()->user()->hasSubscribedTo($plan->id),
                 'bg-white' => ! auth()->user()->hasSubscribedTo($plan->id)
                 ])>
-                <div class="px-6 py-8 sm:p-10 sm:pb-6">
+                <div class="px-6 py-5 sm:p-10 sm:pb-6">
                     <div class="flex justify-center">
                         <span @class([
                             'inline-flex text-xl px-4 py-1 rounded-full leading-5 font-semibold tracking-wide uppercase',
@@ -21,7 +21,7 @@
                         ])>
                         {{ $plan->price }} {{ config('filament-subscriptions.currency') }}
                         <span @class([
-                            'ml-1 pt-8 text-2xl leading-8 font-medium',
+                            'text-xl leading-8 font-medium',
                             'text-white' => auth()->user()->hasSubscribedTo($plan->id),
                             'text-gray-500' => ! auth()->user()->hasSubscribedTo($plan->id)
                             ])>
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <p @class([
-                    'mt-4',
+                    'mt-0',
                     'text-white' => auth()->user()->hasSubscribedTo($plan->id),
                     'text-md' => ! auth()->user()->hasSubscribedTo($plan->id)
                     ])>

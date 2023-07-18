@@ -14,13 +14,30 @@ class ManageSubscriptionPage extends Page
 
     public $subscriptions;
     public $name;
+    public $price;
+    public $trial_interval;
+    public $description;
+    public $isTrial;
     public $features;
 
     public function mount()
     {
-        $this->name = "Golden";
+        $this->getSubscribedPlan();
         $this->features = Feature::all();
         $this->subscriptions = auth()->user()->planSubscriptions()->get();
+    }
+    
+    public function getSubscribedPlan()
+    {
+        $subscription = auth()->user()->planSubscriptions()->latest()->first();
+        if( $subscription )
+        {
+            $this->name = $subscription->name;
+            $this->price = $subscription->price;
+            $this->description = $subscription->plan->description;
+            $this->trial_interval = $subscription->plan->trial_interval;
+            $this->isTrial = $subscription->isFreeSubscription();
+        }
     }
 
     protected function getActions(): array

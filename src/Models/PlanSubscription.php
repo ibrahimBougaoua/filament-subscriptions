@@ -2,6 +2,7 @@
 
 namespace IbrahimBougaoua\FilamentSubscription\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -27,6 +28,8 @@ class PlanSubscription extends Model
         'plan_id',
     ];
 
+    protected $appends = ['canceled','trial_ends'];
+
     public function subscriber() : MorphTo
     {
         return $this->morphTo('subscriber', 'subscriber_type' ,'subscriber_id', 'id');
@@ -35,5 +38,64 @@ class PlanSubscription extends Model
     public function plan()
     {
         return $this->belongsTo(Plan::class,'plan_id');
+    }
+    
+    public function scopePaid($query)
+    {
+        return $query->where('is_paid',true);
+    }
+
+    public function scopeUnPaid($query)
+    {
+        return $query->where('is_paid',false);
+    }
+
+    public function getCanceledAttribute() : bool
+    {
+        return $this->canceled();
+    }
+
+    public function getTrialEndsAttribute() : bool
+    {
+        return ! $this->onFreeSubscription();
+    }
+
+    public function planState() : string
+    {
+        if( $this->active() )
+            return "Actived";
+
+        if( $this->canceled() )
+            return "Canceled";
+
+        if( $this->expired() )
+            return "Expired";
+        
+        return "Canceled";
+    }
+
+    public function active() : bool
+    {
+        return ! $this->expired() || $this->onFreeSubscription();
+    }
+
+    public function canceled() : bool
+    {
+        return $this->canceled_at ? true : false;
+    }
+
+    public function isFreeSubscription() : bool
+    {
+        return $this->trial_ends_at ? true : false;
+    }
+
+    public function onFreeSubscription() : bool
+    {
+        return $this->trial_ends_at ? Carbon::now()->lt($this->trial_ends_at) : false;
+    }
+
+    public function expired() : bool
+    {
+        return $this->ends_at ? Carbon::now()->gte($this->ends_at) : false;
     }
 }

@@ -32,7 +32,7 @@ trait PlanSubscriptions {
     public function hasSubscribedTo($plan_id) : bool
     {
         $subscription = $this->planSubscriptions()->where('plan_id',$plan_id)->first();
-        if( $subscription )
+        if( $subscription && $subscription->active() )
             return true;
         return false;
     }
