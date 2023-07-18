@@ -57,6 +57,7 @@ return new class extends Migration
             $table->smallInteger('resettable_period')->unsigned()->default(0);
             $table->string('resettable_interval')->default('month');
             $table->boolean('status')->default(true);
+            $table->mediumInteger('sort_order')->unsigned()->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

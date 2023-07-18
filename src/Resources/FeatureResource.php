@@ -17,6 +17,8 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use IbrahimBougaoua\FilamentSubscription\Actions\DownStepAction;
+use IbrahimBougaoua\FilamentSubscription\Actions\UpStepAction;
 use IbrahimBougaoua\FilamentSubscription\Models\Feature;
 use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource\Pages;
 use Illuminate\Database\Eloquent\Builder;
@@ -167,9 +169,13 @@ class FeatureResource extends Resource
                     }),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                    DownStepAction::make(),
+                    UpStepAction::make(),
+                    Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
