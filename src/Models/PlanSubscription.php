@@ -25,10 +25,15 @@ class PlanSubscription extends Model
         'canceled_at',
         'timezone',
         'is_paid',
+        'is_selected',
         'plan_id',
     ];
 
     protected $appends = ['canceled','trial_ends'];
+
+    protected $attributes = [
+        'is_selected' => true,
+    ];
 
     public function subscriber() : MorphTo
     {
@@ -60,6 +65,12 @@ class PlanSubscription extends Model
         return ! $this->onFreeSubscription();
     }
 
+    public function cancellation() : void
+    {
+        $this->canceled_at = Carbon::now();
+        $this->save();
+    }
+
     public function planState() : string
     {
         if( $this->active() )
@@ -76,7 +87,7 @@ class PlanSubscription extends Model
 
     public function active() : bool
     {
-        return ! $this->expired() || $this->onFreeSubscription();
+        return ( ! $this->expired() || $this->onFreeSubscription() ) && ! $this->canceled();
     }
 
     public function canceled() : bool

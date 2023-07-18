@@ -49,7 +49,9 @@
                     'w-full filament-button filament-button-size-md inline-flex items-center justify-center py-1 gap-1 font-medium rounded-lg border transition-colors outline-none focus:ring-offset-2 focus:ring-2 focus:ring-inset dark:focus:ring-offset-0 min-h-[2.25rem] px-4 text-sm  dark:bg-gray-800 dark:hover:bg-gray-700 dark:border-gray-600 dark:hover:border-gray-500 dark:text-gray-200 dark:focus:text-primary-400 dark:focus:border-primary-400 dark:focus:bg-gray-800 filament-page-button-action',
                     'bg-success-300 text-white border-success-300 hover:bg-success-50 focus:ring-success-600 focus:text-success-600 focus:bg-success-50 focus:border-success-600' => auth()->user()->hasSubscribedTo($plan->id),
                     'bg-white text-gray-800 border-gray-300 hover:bg-gray-50 focus:ring-primary-600 focus:text-primary-600 focus:bg-primary-50 focus:border-primary-600' => ! auth()->user()->hasSubscribedTo($plan->id)
-                    ])>
+                    ])
+                    wire:click="switchPlan({{ $plan->id }})"
+                    >
                     @if(auth()->user()->hasSubscribedTo($plan->id))
                         Currently Active
                     @else

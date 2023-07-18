@@ -16,10 +16,10 @@
                         {{ $name }}
                     </h3>
                     <h3 class="mt-2 text-xl font-bold text-yellow-500 text-center">
-                        @if( $isTrial ) 
+                        @if( $isTrial )
                             0000.00
                         @else
-                            {{ $price }} 
+                            {{ $price }}
                         @endif
                         {{ config('filament-subscriptions.currency') }} / {{ $trial_interval }}
                     </h3>

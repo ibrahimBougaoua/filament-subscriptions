@@ -40,9 +40,6 @@ class FilamentSubscriptionServiceProvider extends PluginServiceProvider
     public function packageBooted(): void
     {
         parent::packageBooted();
-
-        //$user = User::find(1);
-        //$user->newSubscription('Test','test','Test','2023-07-15 18:55:38.000000','2023-07-15 18:55:38.000000','2023-07-15 18:55:38.000000','2023-07-15 18:55:38.000000','2023-07-15 18:55:38.000000','',1);
     }
 
     public function configurePackage(Package $package): void

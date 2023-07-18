@@ -24,9 +24,9 @@ class ManageSubscriptionPage extends Page
     {
         $this->getSubscribedPlan();
         $this->features = Feature::all();
-        $this->subscriptions = auth()->user()->planSubscriptions()->get();
+        $this->subscriptions = auth()->user()->planSubscriptions()->latest()->get();
     }
-    
+
     public function getSubscribedPlan()
     {
         $subscription = auth()->user()->planSubscriptions()->latest()->first();
