@@ -19,10 +19,11 @@ trait SortOrder {
 
     public function switchSortOrder($action = "next",Model $model,$sort_order,$value) : int
     {
-        $model_id = $action === "next" ? 
-                    $this->getNextModelId($model,$sort_order) :
-                    $this->getPreviousModelId($model,$sort_order);
-
+        if($action === "next")
+            $model_id = ! $this->getNextModelId($model,$sort_order) ? $this->isFirstRecord($model) : $this->getNextModelId($model,$sort_order);
+        else
+            $model_id = ! $this->getPreviousModelId($model,$sort_order) ? $this->isLastRecord($model) : $this->getPreviousModelId($model,$sort_order);
+        //dd($model_id);
         return $this->changeSortOrder($model_id,$value);
     }
 
@@ -43,11 +44,25 @@ trait SortOrder {
 
     public function getNextModelId(Model $model,$sort_order) : int
     {
-        return $model->where('sort_order', '>', $sort_order)->min('sort_order');
+        return $model->where('sort_order', '>', $sort_order)->min('sort_order') ?? 0;
     }
 
     public function getPreviousModelId(Model $model,$sort_order) : int
     {
-        return $model->where('sort_order', '<', $sort_order)->max('sort_order');
+        return $model->where('sort_order', '<', $sort_order)->max('sort_order') ?? 0;
+    }
+
+    public function isFirstRecord(Model $model) : int
+    {
+        $model = $model->orderBy('sort_order', 'asc')->first();
+
+        return $model ? $model->sort_order : 0;
+    }
+
+    public function isLastRecord(Model $model) : int
+    {
+        $model = $model->orderBy('sort_order', 'desc')->first();
+
+        return $model ? $model->sort_order : 0;
     }
 }

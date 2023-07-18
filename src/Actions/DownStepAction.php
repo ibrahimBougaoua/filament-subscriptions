@@ -10,7 +10,7 @@ class DownStepAction extends Action
 {
     protected string|Closure|null $icon = 'heroicon-o-arrow-down';
 
-    public static function make(?string $name = 'down-step'): static
+    public static function make(?string $name = 'down'): static
     {
         return parent::make($name);
     }
