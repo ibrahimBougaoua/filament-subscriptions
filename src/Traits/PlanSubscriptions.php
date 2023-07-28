@@ -39,6 +39,14 @@ trait PlanSubscriptions {
         return $this->planSubscriptions()->latest()->first();
     }
 
+    public function hasSubscribed() : bool
+    {
+        $subscription = $this->planSubscriptions()->latest()->first();
+        if( $subscription && $subscription->active() )
+            return true;
+        return false;
+    }
+
     public function hasSubscribedTo($plan_id) : bool
     {
         $subscription = $this->planSubscriptions()->where('plan_id',$plan_id)->latest()->first();
@@ -54,4 +62,24 @@ trait PlanSubscriptions {
             return true;
         return false;
     }
+    
+    public function getFeatureIdBySlug($slug) : int
+    {
+        $feature = Feature::where('slug',$slug)->first();
+        return $feature ? $feature->id : 0;
+    }
+
+    public function canUseFeature($slug) : bool
+    {
+        $feature_id = $this->getFeatureIdBySlug($slug);
+        
+        if( $this->hasSubscribed() && $feature_id != 0 )
+        {
+            $subscription =  $this->planSubscriptions()->latest()->first();
+            return $this->hasFeature($subscription->plan_id,$feature_id);
+        }
+
+        return false;
+    }
+
 }
