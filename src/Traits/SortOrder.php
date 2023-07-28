@@ -23,7 +23,7 @@ trait SortOrder {
             $model_id = ! $this->getNextModelId($model,$sort_order) ? $this->isFirstRecord($model) : $this->getNextModelId($model,$sort_order);
         else
             $model_id = ! $this->getPreviousModelId($model,$sort_order) ? $this->isLastRecord($model) : $this->getPreviousModelId($model,$sort_order);
-        //dd($model_id);
+
         return $this->changeSortOrder($model_id,$value);
     }
 

@@ -96,63 +96,13 @@ class PlanResource extends Resource
                         ->columnSpan([
                             'md' => 6,
                         ]),
-                        Select::make('trial_interval')
-                        ->label('trial_interval')
+                        Select::make('period')
+                        ->label('period')
                         ->options([
-                            'month' => 'Month',
-                            'day' => 'Day',
-                            'year' => 'Year',
+                            'Yearly' => 'Yearly',
+                            'Monthly' => 'Monthly',
                         ])
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('invoice_period')
-                        ->label('invoice_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        Select::make('invoice_interval')
-                        ->label('invoice_interval')
-                        ->options([
-                            'month' => 'Month',
-                            'day' => 'Day',
-                            'year' => 'Year',
-                        ])
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('grace_period')
-                        ->label('grace_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        Select::make('grace_interval')
-                        ->label('grace_interval')
-                        ->options([
-                            'month' => 'Month',
-                            'day' => 'Day',
-                            'year' => 'Year',
-                        ])
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('prorate_day')
-                        ->label('prorate_day')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('prorate_period')
-                        ->label('prorate_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
-                        TextInput::make('prorate_extend_due')
-                        ->label('prorate_extend_due')
-                        ->numeric()
+                        ->default('Monthly')
                         ->columnSpan([
                             'md' => 6,
                         ]),
