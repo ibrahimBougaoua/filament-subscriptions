@@ -9,7 +9,7 @@ use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource;
 class CreateFeature extends CreateRecord
 {
     protected static string $resource = FeatureResource::class;
-    
+
     protected function getActions(): array
     {
         return [

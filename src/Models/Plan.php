@@ -24,16 +24,16 @@ class Plan extends Model
         'active_subscribers_limit',
         'sort_order',
         'status',
-        'currency_id'
+        'currency_id',
     ];
 
-    public function features() : BelongsToMany
+    public function features(): BelongsToMany
     {
-        return $this->belongsToMany(Feature::class,'filament_plan_features');
+        return $this->belongsToMany(Feature::class, 'filament_plan_features');
     }
 
     public function subscriptions()
     {
-        return $this->hasMany(PlanSubscription::class,"plan_id");
+        return $this->hasMany(PlanSubscription::class, 'plan_id');
     }
 }

@@ -37,130 +37,130 @@ class PlanResource extends Resource
                 Forms\Components\Card::make()
                     ->schema([
                         TextInput::make('name')->label('Name')->required()
-                        ->reactive()
-                        ->afterStateUpdated(function ($state, callable $set) {
-                            $set('slug', Str::slug($state));
-                        })
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, callable $set) {
+                                $set('slug', Str::slug($state));
+                            })
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         TextInput::make('slug')
-                        ->label('Slug')
-                        ->required()
-                        ->disabled()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('Slug')
+                            ->required()
+                            ->disabled()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         Select::make('currency_id')->label('Currency')
-                        ->reactive()
-                        ->required()
-                        ->options(PlanCurrency::all()
-                        ->pluck('name', 'id')
-                        ->toArray())
-                        ->searchable()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->reactive()
+                            ->required()
+                            ->options(PlanCurrency::all()
+                                ->pluck('name', 'id')
+                                ->toArray())
+                            ->searchable()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         TextInput::make('price')
-                        ->label('price')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('price')
+                            ->numeric()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         TextInput::make('signup_fee')
-                        ->label('signup_fee')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('signup_fee')
+                            ->numeric()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         TextInput::make('trial_period')
-                        ->label('trial_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('trial_period')
+                            ->numeric()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         Select::make('trial_interval')
-                        ->label('trial_interval')
-                        ->options([
-                            'month' => 'Month',
-                            'day' => 'Day',
-                            'year' => 'Year',
-                        ])
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('trial_interval')
+                            ->options([
+                                'month' => 'Month',
+                                'day' => 'Day',
+                                'year' => 'Year',
+                            ])
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         TextInput::make('invoice_period')
-                        ->label('invoice_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('invoice_period')
+                            ->numeric()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         Select::make('invoice_interval')
-                        ->label('invoice_interval')
-                        ->options([
-                            'month' => 'Month',
-                            'day' => 'Day',
-                            'year' => 'Year',
-                        ])
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('invoice_interval')
+                            ->options([
+                                'month' => 'Month',
+                                'day' => 'Day',
+                                'year' => 'Year',
+                            ])
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         TextInput::make('grace_period')
-                        ->label('grace_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('grace_period')
+                            ->numeric()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         Select::make('grace_interval')
-                        ->label('grace_interval')
-                        ->options([
-                            'month' => 'Month',
-                            'day' => 'Day',
-                            'year' => 'Year',
-                        ])
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('grace_interval')
+                            ->options([
+                                'month' => 'Month',
+                                'day' => 'Day',
+                                'year' => 'Year',
+                            ])
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         TextInput::make('prorate_day')
-                        ->label('prorate_day')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('prorate_day')
+                            ->numeric()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         TextInput::make('prorate_period')
-                        ->label('prorate_period')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('prorate_period')
+                            ->numeric()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         TextInput::make('prorate_extend_due')
-                        ->label('prorate_extend_due')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('prorate_extend_due')
+                            ->numeric()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         TextInput::make('active_subscribers_limit')
-                        ->label('active_subscribers_limit')
-                        ->numeric()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->label('active_subscribers_limit')
+                            ->numeric()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         Select::make('status')->label('Status')
-                        ->options([
-                            '1' => 'Active',
-                            '0' => 'Inactive',
-                        ])->default('1')->disablePlaceholderSelection()
-                        ->columnSpan([
-                            'md' => 6,
-                        ]),
+                            ->options([
+                                '1' => 'Active',
+                                '0' => 'Inactive',
+                            ])->default('1')->disablePlaceholderSelection()
+                            ->columnSpan([
+                                'md' => 6,
+                            ]),
                         MarkdownEditor::make('description')->label(__('panel.description'))
-                        ->columnSpan([
-                            'md' => 12,
-                        ]),
+                            ->columnSpan([
+                                'md' => 12,
+                            ]),
                         FileUpload::make('image')->label(__('panel.image'))
-                        ->columnSpan([
-                            'md' => 12,
-                        ]),
+                            ->columnSpan([
+                                'md' => 12,
+                            ]),
                     ])
                     ->columns([
                         'md' => 12,
@@ -174,40 +174,40 @@ class PlanResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image')
-                ->label('Image')
-                ->circular(),
+                    ->label('Image')
+                    ->circular(),
                 TextColumn::make('name')
-                ->label('Name')
-                ->icon('heroicon-o-document-text')
-                ->sortable()
-                ->searchable(),
+                    ->label('Name')
+                    ->icon('heroicon-o-document-text')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('price')
-                ->label('Price')
-                ->sortable()
-                ->searchable(),
+                    ->label('Price')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('features_count')
-                ->label('Features')
-                ->counts('features'),
+                    ->label('Features')
+                    ->counts('features'),
                 TextColumn::make('subscriptions_count')
-                ->label('Subscriptions')
-                ->counts('subscriptions'),
+                    ->label('Subscriptions')
+                    ->counts('subscriptions'),
                 IconColumn::make('status')
-                ->label('Status')->boolean()
-                ->trueIcon('heroicon-o-badge-check')
-                ->falseIcon('heroicon-o-x-circle'),
+                    ->label('Status')->boolean()
+                    ->trueIcon('heroicon-o-badge-check')
+                    ->falseIcon('heroicon-o-x-circle'),
                 TextColumn::make('created_at')->label('Created at'),
             ])
             ->filters([
                 SelectFilter::make('status')
                     ->label('Status')->options([
-                    '1' => 'Active',
-                    '0' => 'Inactive',
-                ]),
+                        '1' => 'Active',
+                        '0' => 'Inactive',
+                    ]),
                 Filter::make('created_at')
                     ->label(__('panel.created_at'))->form([
-                    Forms\Components\DatePicker::make('created_from')->label('Created from'),
-                    Forms\Components\DatePicker::make('created_until')->label('Created until'),
-                ])
+                        Forms\Components\DatePicker::make('created_from')->label('Created from'),
+                        Forms\Components\DatePicker::make('created_until')->label('Created until'),
+                    ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
                             ->when(

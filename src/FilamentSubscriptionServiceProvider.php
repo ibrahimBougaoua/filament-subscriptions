@@ -2,20 +2,20 @@
 
 namespace IbrahimBougaoua\FilamentSubscription;
 
+use Filament\PluginServiceProvider;
+use IbrahimBougaoua\FilamentSubscription\Commands\FilamentSubscriptionCommand;
 use IbrahimBougaoua\FilamentSubscription\Pages\ManageSubscriptionPage;
 use IbrahimBougaoua\FilamentSubscription\Pages\PlansPage;
-use IbrahimBougaoua\FilamentSubscription\Commands\FilamentSubscriptionCommand;
 use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanResource;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource;
 use IbrahimBougaoua\FilamentSubscription\Widgets\SubscriptionsOverview;
 use Spatie\LaravelPackageTools\Package;
-use Filament\PluginServiceProvider;
 
 class FilamentSubscriptionServiceProvider extends PluginServiceProvider
 {
     protected array $styles = [
-        'tailwindcss-styles' => __DIR__ . '/../dist/css/style.css',
+        'tailwindcss-styles' => __DIR__.'/../dist/css/style.css',
     ];
 
     protected array $scripts = [
