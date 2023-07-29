@@ -19,7 +19,6 @@ class PlanCurrency extends Model
 
     public function plan()
     {
-        return $this->hasMany(Plan::class,"plan_id");
+        return $this->hasMany(Plan::class, 'plan_id');
     }
-
 }
