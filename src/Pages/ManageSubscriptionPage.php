@@ -1,10 +1,10 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Pages;
+namespace IbrahimBougaoua\SubscriptionSystem\Pages;
 
-use Filament\Pages\Actions\Action;
 use Filament\Pages\Page;
-use IbrahimBougaoua\FilamentSubscription\Models\Feature;
+use Filament\Pages\Actions\Action;
+use IbrahimBougaoua\SubscriptionSystem\Models\Feature;
 
 class ManageSubscriptionPage extends Page
 {
@@ -13,17 +13,11 @@ class ManageSubscriptionPage extends Page
     protected static string $view = 'filament-subscriptions::pages.manage-subscription-page';
 
     public $subscriptions;
-
     public $name;
-
     public $price;
-
     public $trial_interval;
-
     public $description;
-
     public $isTrial;
-
     public $features;
 
     public function mount()
@@ -36,7 +30,8 @@ class ManageSubscriptionPage extends Page
     public function getSubscribedPlan()
     {
         $subscription = auth()->user()->planSubscriptions()->latest()->first();
-        if ($subscription) {
+        if( $subscription )
+        {
             $this->name = $subscription->name;
             $this->price = $subscription->price;
             $this->description = $subscription->plan->description;

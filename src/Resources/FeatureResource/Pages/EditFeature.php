@@ -1,11 +1,11 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource\Pages;
+namespace IbrahimBougaoua\SubscriptionSystem\Resources\FeatureResource\Pages;
 
 use Filament\Pages\Actions;
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
-use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource;
+use IbrahimBougaoua\SubscriptionSystem\Resources\FeatureResource;
 
 class EditFeature extends EditRecord
 {

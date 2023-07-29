@@ -1,10 +1,10 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Commands;
+namespace IbrahimBougaoua\SubscriptionSystem\Commands;
 
 use Illuminate\Console\Command;
 
-class FilamentSubscriptionCommand extends Command
+class SubscriptionSystemCommand extends Command
 {
     public $signature = 'filament-subscriptions';
 

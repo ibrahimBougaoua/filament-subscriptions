@@ -1,6 +1,6 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Resources;
+namespace IbrahimBougaoua\SubscriptionSystem\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -16,9 +16,10 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
-use IbrahimBougaoua\FilamentSubscription\Models\Plan;
-use IbrahimBougaoua\FilamentSubscription\Models\PlanFeature;
-use IbrahimBougaoua\FilamentSubscription\Resources\PlanFeatureResource\Pages;
+use IbrahimBougaoua\SubscriptionSystem\Models\Plan;
+use IbrahimBougaoua\SubscriptionSystem\Models\PlanCurrency;
+use IbrahimBougaoua\SubscriptionSystem\Models\PlanFeature;
+use IbrahimBougaoua\SubscriptionSystem\Resources\PlanFeatureResource\Pages;
 use Illuminate\Database\Eloquent\Builder;
 use Str;
 
@@ -41,68 +42,68 @@ class PlanFeatureResource extends Resource
                 Forms\Components\Card::make()
                     ->schema([
                         TextInput::make('name')->label('Name')->required()
-                            ->reactive()
-                            ->afterStateUpdated(function ($state, callable $set) {
-                                $set('slug', Str::slug($state));
-                            })
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->reactive()
+                        ->afterStateUpdated(function ($state, callable $set) {
+                            $set('slug', Str::slug($state));
+                        })
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         TextInput::make('slug')
-                            ->label('Slug')
-                            ->required()
-                            ->disabled()
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->label('Slug')
+                        ->required()
+                        ->disabled()
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         TextInput::make('value')
-                            ->label('value')
-                            ->columnSpan([
-                                'md' => 4,
-                            ]),
+                        ->label('value')
+                        ->columnSpan([
+                            'md' => 4,
+                        ]),
                         TextInput::make('resettable_period')
-                            ->label('resettable_period')
-                            ->numeric()
-                            ->columnSpan([
-                                'md' => 4,
-                            ]),
+                        ->label('resettable_period')
+                        ->numeric()
+                        ->columnSpan([
+                            'md' => 4,
+                        ]),
                         Select::make('resettable_interval')
-                            ->label('resettable_interval')
-                            ->options([
-                                'month' => 'Month',
-                                'day' => 'Day',
-                                'year' => 'Year',
-                            ])
-                            ->columnSpan([
-                                'md' => 4,
-                            ]),
+                        ->label('resettable_interval')
+                        ->options([
+                            'month' => 'Month',
+                            'day' => 'Day',
+                            'year' => 'Year',
+                        ])
+                        ->columnSpan([
+                            'md' => 4,
+                        ]),
                         Select::make('status')->label('Status')
-                            ->options([
-                                '1' => 'Active',
-                                '0' => 'Inactive',
-                            ])->default('1')->disablePlaceholderSelection()
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->options([
+                            '1' => 'Active',
+                            '0' => 'Inactive',
+                        ])->default('1')->disablePlaceholderSelection()
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         Select::make('plan_id')
-                            ->label('Plan')
-                            ->reactive()
-                            ->required()
-                            ->options(Plan::all()
-                                ->pluck('name', 'id')
-                                ->toArray())
-                            ->searchable()
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->label('Plan')
+                        ->reactive()
+                        ->required()
+                        ->options(Plan::all()
+                        ->pluck('name', 'id')
+                        ->toArray())
+                        ->searchable()
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         MarkdownEditor::make('description')->label(__('panel.description'))
-                            ->columnSpan([
-                                'md' => 12,
-                            ]),
+                        ->columnSpan([
+                            'md' => 12,
+                        ]),
                         FileUpload::make('image')->label(__('panel.image'))
-                            ->columnSpan([
-                                'md' => 12,
-                            ]),
+                        ->columnSpan([
+                            'md' => 12,
+                        ]),
                     ])
                     ->columns([
                         'md' => 12,
@@ -116,38 +117,38 @@ class PlanFeatureResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image')
-                    ->label('Image')
-                    ->circular(),
+                ->label('Image')
+                ->circular(),
                 TextColumn::make('name')
-                    ->label('Name')
-                    ->icon('heroicon-o-document-text')
-                    ->sortable()
-                    ->searchable(),
+                ->label('Name')
+                ->icon('heroicon-o-document-text')
+                ->sortable()
+                ->searchable(),
                 TextColumn::make('plan.name')
-                    ->label('Plan')
-                    ->sortable()
-                    ->searchable(),
+                ->label('Plan')
+                ->sortable()
+                ->searchable(),
                 TextColumn::make('resettable_period')
-                    ->label('Resettable Period'),
+                ->label('Resettable Period'),
                 TextColumn::make('resettable_interval')
-                    ->label('Resettable Interval'),
+                ->label('Resettable Interval'),
                 IconColumn::make('status')
-                    ->label('Status')->boolean()
-                    ->trueIcon('heroicon-o-badge-check')
-                    ->falseIcon('heroicon-o-x-circle'),
+                ->label('Status')->boolean()
+                ->trueIcon('heroicon-o-badge-check')
+                ->falseIcon('heroicon-o-x-circle'),
                 TextColumn::make('created_at')->label('Created at'),
             ])
             ->filters([
                 SelectFilter::make('status')
                     ->label('Status')->options([
-                        '1' => 'Active',
-                        '0' => 'Inactive',
-                    ]),
+                    '1' => 'Active',
+                    '0' => 'Inactive',
+                ]),
                 Filter::make('created_at')
                     ->label(__('panel.created_at'))->form([
-                        Forms\Components\DatePicker::make('created_from')->label('Created from'),
-                        Forms\Components\DatePicker::make('created_until')->label('Created until'),
-                    ])
+                    Forms\Components\DatePicker::make('created_from')->label('Created from'),
+                    Forms\Components\DatePicker::make('created_until')->label('Created until'),
+                ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
                             ->when(

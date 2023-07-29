@@ -1,6 +1,6 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Resources;
+namespace IbrahimBougaoua\SubscriptionSystem\Resources;
 
 use Filament\Forms;
 use Filament\Forms\Components\CheckboxList;
@@ -18,10 +18,10 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
-use IbrahimBougaoua\FilamentSubscription\Models\Currency;
-use IbrahimBougaoua\FilamentSubscription\Models\Feature;
-use IbrahimBougaoua\FilamentSubscription\Models\Plan;
-use IbrahimBougaoua\FilamentSubscription\Resources\PlanResource\Pages;
+use IbrahimBougaoua\SubscriptionSystem\Models\Feature;
+use IbrahimBougaoua\SubscriptionSystem\Models\Plan;
+use IbrahimBougaoua\SubscriptionSystem\Models\Currency;
+use IbrahimBougaoua\SubscriptionSystem\Resources\PlanResource\Pages;
 use Illuminate\Database\Eloquent\Builder;
 use Str;
 
@@ -41,7 +41,7 @@ class PlanResource extends Resource
     {
         return static::getModel()::count();
     }
-
+    
     protected static function getNavigationBadgeColor(): ?string
     {
         return static::getModel()::count() > 0 ? 'success' : 'danger';
@@ -54,102 +54,102 @@ class PlanResource extends Resource
                 Forms\Components\Card::make()
                     ->schema([
                         TextInput::make('name')->label('Name')->required()
-                            ->reactive()
-                            ->afterStateUpdated(function ($state, callable $set) {
-                                $set('slug', Str::slug($state));
-                            })
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->reactive()
+                        ->afterStateUpdated(function ($state, callable $set) {
+                            $set('slug', Str::slug($state));
+                        })
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         TextInput::make('slug')
-                            ->label('Slug')
-                            ->required()
-                            ->disabled()
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->label('Slug')
+                        ->required()
+                        ->disabled()
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         Select::make('currency_id')->label('Currency')
-                            ->reactive()
-                            ->required()
-                            ->options(Currency::all()
-                                ->pluck('name', 'id')
-                                ->toArray())
-                            ->searchable()
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->reactive()
+                        ->required()
+                        ->options(Currency::all()
+                        ->pluck('name', 'id')
+                        ->toArray())
+                        ->searchable()
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         TextInput::make('price')
-                            ->label('price')
-                            ->numeric()
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->label('price')
+                        ->numeric()
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         TextInput::make('signup_fee')
-                            ->label('signup_fee')
-                            ->numeric()
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->label('signup_fee')
+                        ->numeric()
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         TextInput::make('trial_period')
-                            ->label('trial_period')
-                            ->numeric()
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->label('trial_period')
+                        ->numeric()
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         Select::make('period')
-                            ->label('period')
-                            ->options([
-                                'Yearly' => 'Yearly',
-                                'Monthly' => 'Monthly',
-                            ])
-                            ->default('Monthly')
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->label('period')
+                        ->options([
+                            'Yearly' => 'Yearly',
+                            'Monthly' => 'Monthly',
+                        ])
+                        ->default('Monthly')
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         TextInput::make('active_subscribers_limit')
-                            ->label('active_subscribers_limit')
-                            ->numeric()
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->label('active_subscribers_limit')
+                        ->numeric()
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         Select::make('status')->label('Status')
-                            ->options([
-                                '1' => 'Active',
-                                '0' => 'Inactive',
-                            ])->default('1')
-                            ->disablePlaceholderSelection()
-                            ->columnSpan([
-                                'md' => 6,
-                            ]),
+                        ->options([
+                            '1' => 'Active',
+                            '0' => 'Inactive',
+                        ])->default('1')
+                        ->disablePlaceholderSelection()
+                        ->columnSpan([
+                            'md' => 6,
+                        ]),
                         MarkdownEditor::make('description')
-                            ->label(__('panel.description'))
-                            ->columnSpan([
-                                'md' => 12,
-                            ]),
+                        ->label(__('panel.description'))
+                        ->columnSpan([
+                            'md' => 12,
+                        ]),
                         FileUpload::make('image')
-                            ->label(__('panel.image'))
-                            ->columnSpan([
-                                'md' => 12,
-                            ]),
+                        ->label(__('panel.image'))
+                        ->columnSpan([
+                            'md' => 12,
+                        ]),
                     ])
                     ->columns([
                         'md' => 12,
                     ])
                     ->columnSpan('full'),
-
-                Forms\Components\Card::make()
+                    
+                    Forms\Components\Card::make()
                     ->schema([
                         Forms\Components\Placeholder::make('All Features'),
                         CheckboxList::make('features')
-                            ->relationship('features', 'id')
-                            ->label('')
-                            ->options(
-                                Feature::pluck('name', 'id')->toArray()
-                            )
-                            ->columns(3)
-                            ->columnSpan([
-                                'md' => 12,
-                            ]),
+                        ->relationship('features', 'id')
+                        ->label('')
+                        ->options(
+                            Feature::pluck('name','id')->toArray()
+                        )
+                        ->columns(3)
+                        ->columnSpan([
+                            'md' => 12,
+                        ]),
                     ])
                     ->columns([
                         'md' => 12,
@@ -163,41 +163,39 @@ class PlanResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image')
-                    ->label('Image')
-                    ->circular(),
+                ->label('Image')
+                ->circular(),
                 TextColumn::make('name')
-                    ->label('Name')
-                    ->icon('heroicon-o-document-text')
-                    ->sortable()
-                    ->searchable(),
+                ->label('Name')
+                ->icon('heroicon-o-document-text')
+                ->sortable()
+                ->searchable(),
                 TextColumn::make('price')
-                    ->label('Price')
-                    ->sortable()
-                    ->searchable(),
+                ->label('Price')
+                ->sortable()
+                ->searchable(),
                 BadgeColumn::make('features_count')
-                    ->label('Features')
-                    ->color(static function ($state): string {
-                        if ($state === 0) {
-                            return 'danger';
-                        }
-
-                        return 'success';
-                    })
-                    ->counts('features'),
+                ->label('Features')
+                ->color(static function ($state): string {
+                    if ($state === 0) {
+                        return 'danger';
+                    }
+                    return 'success';
+                })
+                ->counts('features'),
                 BadgeColumn::make('subscriptions_count')
-                    ->label('Subscriptions')
-                    ->color(static function ($state): string {
-                        if ($state === 0) {
-                            return 'danger';
-                        }
-
-                        return 'success';
-                    })
-                    ->counts('subscriptions'),
+                ->label('Subscriptions')
+                ->color(static function ($state): string {
+                    if ($state === 0) {
+                        return 'danger';
+                    }
+                    return 'success';
+                })
+                ->counts('subscriptions'),
                 IconColumn::make('status')
-                    ->label('Status')->boolean()
-                    ->trueIcon('heroicon-o-badge-check')
-                    ->falseIcon('heroicon-o-x-circle'),
+                ->label('Status')->boolean()
+                ->trueIcon('heroicon-o-badge-check')
+                ->falseIcon('heroicon-o-x-circle'),
                 TextColumn::make('created_at')->label('Created at'),
             ])
             ->filters([
@@ -209,9 +207,9 @@ class PlanResource extends Resource
                     ]),
                 Filter::make('created_at')
                     ->label(__('panel.created_at'))->form([
-                        Forms\Components\DatePicker::make('created_from')->label('Created from'),
-                        Forms\Components\DatePicker::make('created_until')->label('Created until'),
-                    ])
+                    Forms\Components\DatePicker::make('created_from')->label('Created from'),
+                    Forms\Components\DatePicker::make('created_until')->label('Created until'),
+                ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
                             ->when(

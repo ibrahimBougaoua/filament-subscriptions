@@ -1,9 +1,9 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Resources\PlanFeatureResource\Pages;
+namespace IbrahimBougaoua\SubscriptionSystem\Resources\PlanFeatureResource\Pages;
 
 use Filament\Resources\Pages\CreateRecord;
-use IbrahimBougaoua\FilamentSubscription\Resources\PlanFeatureResource;
+use IbrahimBougaoua\SubscriptionSystem\Resources\PlanFeatureResource;
 
 class CreatePlanFeature extends CreateRecord
 {

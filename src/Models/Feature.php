@@ -1,8 +1,9 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Models;
+namespace IbrahimBougaoua\SubscriptionSystem\Models;
 
-use IbrahimBougaoua\FilamentSubscription\Traits\SortOrder;
+use IbrahimBougaoua\SubscriptionSystem\Traits\SortOrder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,13 +27,13 @@ class Feature extends Model
         'status',
     ];
 
-    public function plans(): BelongsToMany
+    public function plans() : BelongsToMany
     {
-        return $this->belongsToMany(Plan::class, 'filament_plan_features');
+        return $this->belongsToMany(Plan::class,"filament_plan_features");
     }
 
-    public function belongsToPlan(): BelongsTo
+    public function belongsToPlan() : BelongsTo
     {
-        return $this->belongsTo(Plan::class, 'filament_plan_features');
+        return $this->belongsTo(Plan::class,"filament_plan_features");
     }
 }

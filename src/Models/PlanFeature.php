@@ -1,6 +1,6 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Models;
+namespace IbrahimBougaoua\SubscriptionSystem\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -1,6 +1,6 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Models;
+namespace IbrahimBougaoua\SubscriptionSystem\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +19,7 @@ class PlanCurrency extends Model
 
     public function plan()
     {
-        return $this->hasMany(Plan::class, 'plan_id');
+        return $this->hasMany(Plan::class,"plan_id");
     }
+
 }

@@ -1,13 +1,12 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Components;
+namespace IbrahimBougaoua\SubscriptionSystem\Components;
 
 use Filament\Forms\Components\Component;
 
 class PlanDetails extends Component
 {
     public $name;
-
     public $features;
 
     public function mount()

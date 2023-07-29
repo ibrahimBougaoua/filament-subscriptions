@@ -1,11 +1,11 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Resources\PlanResource\Pages;
+namespace IbrahimBougaoua\SubscriptionSystem\Resources\PlanResource\Pages;
 
 use Filament\Pages\Actions;
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
-use IbrahimBougaoua\FilamentSubscription\Resources\PlanResource;
+use IbrahimBougaoua\SubscriptionSystem\Resources\PlanResource;
 
 class EditPlan extends EditRecord
 {

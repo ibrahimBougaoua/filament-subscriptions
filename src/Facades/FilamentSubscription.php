@@ -1,16 +1,16 @@
 <?php
 
-namespace IbrahimBougaoua\FilamentSubscription\Facades;
+namespace IbrahimBougaoua\SubscriptionSystem\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \IbrahimBougaoua\FilamentSubscription\FilamentSubscription
+ * @see \IbrahimBougaoua\SubscriptionSystem\SubscriptionSystem
  */
-class FilamentSubscription extends Facade
+class SubscriptionSystem extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \IbrahimBougaoua\FilamentSubscription\FilamentSubscription::class;
+        return \IbrahimBougaoua\SubscriptionSystem\SubscriptionSystem::class;
     }
 }
