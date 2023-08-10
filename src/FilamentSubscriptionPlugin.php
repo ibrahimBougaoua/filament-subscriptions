@@ -29,17 +29,17 @@ class FilamentSubscriptionPlugin implements Plugin
     {
         $panel
             ->resources([
-				PlanResource::class,
-				FeatureResource::class,
-				PlanSubscriptionsResource::class,
+                PlanResource::class,
+                FeatureResource::class,
+                PlanSubscriptionsResource::class,
             ])
-			->pages([
-				ManageSubscriptionPage::class,
-				PlansPage::class,
-			])
-			->widgets([
-				SubscriptionsOverview::class,
-			]);
+            ->pages([
+                ManageSubscriptionPage::class,
+                PlansPage::class,
+            ])
+            ->widgets([
+                SubscriptionsOverview::class,
+            ]);
     }
 
     public function boot(Panel $panel): void

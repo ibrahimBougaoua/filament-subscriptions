@@ -22,11 +22,11 @@ class FilamentSubscriptionServiceProvider extends PluginServiceProvider
             ->hasMigration('create_filament_subscriptions_table')
             ->hasCommand(FilamentSubscriptionCommand::class);
     }
-	
+
     public function packageBooted(): void
     {
         FilamentAsset::register([
-            Css::make('filament-subscriptions-tailwindcss-styles', __DIR__ . '/../dist/css/style.css'),
+            Css::make('filament-subscriptions-tailwindcss-styles', __DIR__.'/../dist/css/style.css'),
         ], 'filament-subscriptions');
     }
 }
