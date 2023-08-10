@@ -2,11 +2,13 @@
 
 namespace IbrahimBougaoua\FilamentSubscription;
 
-use Filament\PluginServiceProvider;
+use Filament\Support\Assets\Css;
+use Filament\Support\Facades\FilamentAsset;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 use IbrahimBougaoua\FilamentSubscription\Commands\FilamentSubscriptionCommand;
 use Spatie\LaravelPackageTools\Package;
 
-class FilamentSubscriptionServiceProvider extends PluginServiceProvider
+class FilamentSubscriptionServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
