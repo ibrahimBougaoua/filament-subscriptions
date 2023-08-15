@@ -16,11 +16,11 @@ class EditPlan extends EditRecord
         return [
             Action::make('plans')
                 ->label('Plans')
-                ->url(route('filament.resources.plans.index'))
+                ->url(route('filament.admin.resources.plans.index'))
                 ->color('success')
-                ->icon('heroicon-o-cube'),
+                ->icon('heroicon-o-rectangle-stack'),
             Actions\DeleteAction::make()
-                ->icon('heroicon-o-trash'),
+                ->icon('heroicon-o-rectangle-stack'),
         ];
     }
 }

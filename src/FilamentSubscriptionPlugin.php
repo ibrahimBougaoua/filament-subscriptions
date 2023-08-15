@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace IbrahimBougaoua\FilamentCountryStateCity;
+namespace IbrahimBougaoua\FilamentSubscription;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
@@ -22,7 +22,7 @@ class FilamentSubscriptionPlugin implements Plugin
 
     public function getId(): string
     {
-        return 'filament-subscription-system';
+        return 'filament-subscriptions';
     }
 
     public function register(Panel $panel): void

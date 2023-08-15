@@ -8,7 +8,9 @@ use IbrahimBougaoua\FilamentSubscription\Models\Feature;
 
 class ManageSubscriptionPage extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'icon-subscription';
+
+    protected static ?string $navigationGroup = 'Manage Subscriptions';
 
     protected static string $view = 'filament-subscriptions::pages.manage-subscription-page';
 
@@ -50,9 +52,9 @@ class ManageSubscriptionPage extends Page
         return [
             Action::make('upgrade')
                 ->label('Upgrade Plan')
-                ->url(route('filament.pages.plans-page'))
+                ->url(route('filament.admin.pages.plans-page'))
                 ->color('success')
-                ->icon('heroicon-o-cube'),
+                ->icon('heroicon-o-rectangle-stack'),
         ];
     }
 }

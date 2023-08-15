@@ -5,6 +5,7 @@ namespace IbrahimBougaoua\FilamentSubscription\Widgets;
 use Carbon\Carbon;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
+use Filament\Widgets\StatsOverviewWidget\Stat;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 use IbrahimBougaoua\FilamentSubscription\Models\PlanSubscription;
@@ -80,24 +81,24 @@ class SubscriptionsOverview extends BaseWidget
         }
 
         return [
-            Card::make('Today', $profit_today.config('filament-subscriptions.currency'))
+            Stat::make('Today', $profit_today.config('filament-subscriptions.currency'))
                 ->description('Profit Today')
-                ->descriptionIcon('heroicon-s-trending-up')
+                ->descriptionIcon('heroicon-o-rectangle-stack')
                 ->chart($profit_today_arr)
                 ->color('success'),
-            Card::make('Last Week', $profit_last_week.config('filament-subscriptions.currency'))
+            Stat::make('Last Week', $profit_last_week.config('filament-subscriptions.currency'))
                 ->description('Profit Last Week')
-                ->descriptionIcon('heroicon-s-trending-up')
+                ->descriptionIcon('heroicon-o-rectangle-stack')
                 ->chart($profit_last_week_arr)
                 ->color('success'),
-            Card::make('Last Month', $profit_last_month.config('filament-subscriptions.currency'))
+            Stat::make('Last Month', $profit_last_month.config('filament-subscriptions.currency'))
                 ->description('Profit Last Month')
-                ->descriptionIcon('heroicon-s-trending-up')
+                ->descriptionIcon('heroicon-o-rectangle-stack')
                 ->chart($profit_last_month_arr)
                 ->color('success'),
-            Card::make('Last Year', $profit_last_year.config('filament-subscriptions.currency'))
+            Stat::make('Last Year', $profit_last_year.config('filament-subscriptions.currency'))
                 ->description('Profit Last Year')
-                ->descriptionIcon('heroicon-s-trending-up')
+                ->descriptionIcon('heroicon-o-rectangle-stack')
                 ->chart($profit_last_year_arr)
                 ->color('success'),
         ];

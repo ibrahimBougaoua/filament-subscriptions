@@ -18,14 +18,14 @@ class ManagePlanSubscriptions extends ManageRecords
         return [
             Action::make('plans')
                 ->label('Plans')
-                ->url(route('filament.resources.plans.index'))
+                ->url(route('filament.admin.resources.plans.index'))
                 ->color('success')
-                ->icon('heroicon-o-cube'),
+                ->icon('heroicon-o-rectangle-stack'),
             Action::make('features')
                 ->label('Features')
-                ->url(route('filament.resources.features.index'))
+                ->url(route('filament.admin.resources.features.index'))
                 ->color('success')
-                ->icon('heroicon-o-tag'),
+                ->icon('heroicon-o-rectangle-stack'),
         ];
     }
 

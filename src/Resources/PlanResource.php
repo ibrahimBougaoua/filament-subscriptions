@@ -6,11 +6,12 @@ use Filament\Forms;
 use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\IconColumn;
@@ -29,7 +30,7 @@ class PlanResource extends Resource
 {
     protected static ?string $model = Plan::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'icon-plan';
 
     protected static ?string $navigationGroup = 'Plans';
 
@@ -37,21 +38,13 @@ class PlanResource extends Resource
 
     protected static ?string $pluralLabel = 'Plans';
 
-    protected static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
-
-    protected static function getNavigationBadgeColor(): ?string
-    {
-        return static::getModel()::count() > 0 ? 'success' : 'danger';
-    }
-
+    protected static ?string $recordTitleAttribute = 'name';
+    
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Card::make()
+                Section::make()
                     ->schema([
                         TextInput::make('name')->label('Name')->required()
                             ->reactive()
@@ -167,7 +160,7 @@ class PlanResource extends Resource
                     ->circular(),
                 TextColumn::make('name')
                     ->label('Name')
-                    ->icon('heroicon-o-document-text')
+                    ->icon('heroicon-o-rectangle-stack')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('price')
@@ -196,8 +189,8 @@ class PlanResource extends Resource
                     ->counts('subscriptions'),
                 IconColumn::make('status')
                     ->label('Status')->boolean()
-                    ->trueIcon('heroicon-o-badge-check')
-                    ->falseIcon('heroicon-o-x-circle'),
+                    ->trueIcon('heroicon-o-rectangle-stack')
+                    ->falseIcon('heroicon-o-rectangle-stack'),
                 TextColumn::make('created_at')->label('Created at'),
             ])
             ->filters([

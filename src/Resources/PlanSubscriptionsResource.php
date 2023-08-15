@@ -3,10 +3,11 @@
 namespace IbrahimBougaoua\FilamentSubscription\Resources;
 
 use Filament\Forms;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\ToggleColumn;
@@ -19,7 +20,7 @@ class PlanSubscriptionsResource extends Resource
 {
     protected static ?string $model = PlanSubscription::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'icon-subscribed';
 
     protected static ?string $navigationGroup = 'Plans';
 
@@ -27,16 +28,8 @@ class PlanSubscriptionsResource extends Resource
 
     protected static ?string $pluralLabel = 'Subscribed User Plans';
 
-    protected static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
-
-    protected static function getNavigationBadgeColor(): ?string
-    {
-        return static::getModel()::count() > 0 ? 'success' : 'danger';
-    }
-
+    protected static ?string $recordTitleAttribute = 'name';
+    
     public static function canCreate(): bool
     {
         return false;
@@ -46,7 +39,7 @@ class PlanSubscriptionsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Card::make()
+                Section::make()
                     ->schema([
                         TextInput::make('name')
                             ->label('Name')

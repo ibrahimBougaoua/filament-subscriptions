@@ -10,8 +10,10 @@ use IbrahimBougaoua\FilamentSubscription\Models\Plan;
 
 class PlansPage extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'icon-plan';
 
+    protected static ?string $navigationGroup = 'Manage Subscriptions';
+    
     protected static string $view = 'filament-subscriptions::pages.plans-page';
 
     public $plans;
@@ -38,7 +40,7 @@ class PlansPage extends Page
             ->success()
             ->send();
 
-        return redirect()->route('filament.pages.manage-subscription-page');
+        return redirect()->route('filament.admin.pages.manage-subscription-page');
     }
 
     protected function getActions(): array
@@ -46,9 +48,9 @@ class PlansPage extends Page
         return [
             Action::make('manage-subscription')
                 ->label('Manage Subscription')
-                ->url(route('filament.pages.manage-subscription-page'))
+                ->url(route('filament.admin.pages.manage-subscription-page'))
                 ->color('success')
-                ->icon('heroicon-o-cube'),
+                ->icon('heroicon-o-rectangle-stack'),
         ];
     }
 }

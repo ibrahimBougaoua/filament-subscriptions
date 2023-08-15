@@ -16,11 +16,11 @@ class ListFeatures extends ListRecords
         return [
             Action::make('plans')
                 ->label('Plans')
-                ->url(route('filament.resources.plans.index'))
+                ->url(route('filament.admin.resources.plans.index'))
                 ->color('success')
-                ->icon('heroicon-o-cube'),
+                ->icon('heroicon-o-rectangle-stack'),
             Actions\CreateAction::make()
-                ->icon('heroicon-o-plus'),
+                ->icon('heroicon-o-rectangle-stack'),
         ];
     }
 }

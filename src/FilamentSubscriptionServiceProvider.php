@@ -4,9 +4,9 @@ namespace IbrahimBougaoua\FilamentSubscription;
 
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use IbrahimBougaoua\FilamentSubscription\Commands\FilamentSubscriptionCommand;
 use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class FilamentSubscriptionServiceProvider extends PackageServiceProvider
 {

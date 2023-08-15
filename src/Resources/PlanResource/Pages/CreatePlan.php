@@ -15,9 +15,9 @@ class CreatePlan extends CreateRecord
         return [
             Action::make('plans')
                 ->label('Plans')
-                ->url(route('filament.resources.plans.index'))
+                ->url(route('filament.admin.resources.plans.index'))
                 ->color('success')
-                ->icon('heroicon-o-cube'),
+                ->icon('heroicon-o-rectangle-stack'),
         ];
     }
 }

@@ -7,9 +7,9 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Form;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
@@ -26,7 +26,7 @@ class PlanFeatureResource extends Resource
 {
     protected static ?string $model = PlanFeature::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'icon-stack';
 
     protected static ?string $navigationGroup = 'Plans';
 
@@ -120,7 +120,7 @@ class PlanFeatureResource extends Resource
                     ->circular(),
                 TextColumn::make('name')
                     ->label('Name')
-                    ->icon('heroicon-o-document-text')
+                    ->icon('heroicon-o-rectangle-stack')
                     ->sortable()
                     ->searchable(),
                 TextColumn::make('plan.name')
@@ -133,8 +133,8 @@ class PlanFeatureResource extends Resource
                     ->label('Resettable Interval'),
                 IconColumn::make('status')
                     ->label('Status')->boolean()
-                    ->trueIcon('heroicon-o-badge-check')
-                    ->falseIcon('heroicon-o-x-circle'),
+                    ->trueIcon('heroicon-o-rectangle-stack')
+                    ->falseIcon('heroicon-o-rectangle-stack'),
                 TextColumn::make('created_at')->label('Created at'),
             ])
             ->filters([
