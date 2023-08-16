@@ -2,7 +2,7 @@
 
 namespace IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource\Pages;
 
-use Filament\Pages\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource;
 
@@ -14,7 +14,7 @@ class CreateFeature extends CreateRecord
     {
         return [
             Action::make('features')
-                ->label('Features')
+                ->label(__('ui.features'))
                 ->url(route('filament.admin.resources.features.index'))
                 ->color('success')
                 ->icon('heroicon-o-rectangle-stack'),

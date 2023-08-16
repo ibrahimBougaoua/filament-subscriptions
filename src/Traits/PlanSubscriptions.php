@@ -69,6 +69,11 @@ trait PlanSubscriptions
         return false;
     }
 
+    public function hasSubscribedToTrial(): bool
+    {
+        return $this->planSubscriptions()->trial()->first() ? true : false;
+    }
+
     public function hasFeature($plan_id, $feature_id): bool
     {
         $feature = PlanFeature::where('plan_id', $plan_id)->where('feature_id', $feature_id)->first();

@@ -3,7 +3,7 @@
 namespace IbrahimBougaoua\FilamentSubscription\Pages;
 
 use Filament\Notifications\Notification;
-use Filament\Pages\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Pages\Page;
 use IbrahimBougaoua\FilamentSubscription\Models\Feature;
 use IbrahimBougaoua\FilamentSubscription\Models\Plan;
@@ -44,7 +44,7 @@ class PlansPage extends Page
         $subscription = auth()->user()->newSubscription($plan);
 
         Notification::make()
-            ->title('Switched to '.$subscription->name.' Plan successfully')
+            ->title(__('ui.switched_to') . ' '.$subscription->name. ' ' . __('ui.plan_successfully'))
             ->success()
             ->send();
 
@@ -55,7 +55,7 @@ class PlansPage extends Page
     {
         return [
             Action::make('manage-subscription')
-                ->label('Manage Subscription')
+                ->label(__('ui.manage_subscription'))
                 ->url(route('filament.admin.pages.manage-subscription-page'))
                 ->color('success')
                 ->icon('heroicon-o-rectangle-stack'),

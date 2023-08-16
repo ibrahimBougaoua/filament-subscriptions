@@ -4,7 +4,6 @@ namespace IbrahimBougaoua\FilamentSubscription\Widgets;
 
 use Carbon\Carbon;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
-use Filament\Widgets\StatsOverviewWidget\Card;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
@@ -80,24 +79,26 @@ class SubscriptionsOverview extends BaseWidget
             $profit_last_year_arr[] = $item;
         }
 
+        $currency = (__('filament-panels::layout.direction') === 'rtl') ? 'دج' : config('filament-subscriptions.currency');
+
         return [
-            Stat::make('Today', $profit_today.config('filament-subscriptions.currency'))
-                ->description('Profit Today')
+            Stat::make(__('ui.today'), $profit_today.$currency)
+                ->description(__('ui.profit_today'))
                 ->descriptionIcon('heroicon-o-rectangle-stack')
                 ->chart($profit_today_arr)
                 ->color('success'),
-            Stat::make('Last Week', $profit_last_week.config('filament-subscriptions.currency'))
-                ->description('Profit Last Week')
+            Stat::make(__('ui.last_week'), $profit_last_week.$currency)
+                ->description(__('ui.profit_last_week'))
                 ->descriptionIcon('heroicon-o-rectangle-stack')
                 ->chart($profit_last_week_arr)
                 ->color('success'),
-            Stat::make('Last Month', $profit_last_month.config('filament-subscriptions.currency'))
-                ->description('Profit Last Month')
+            Stat::make(__('ui.last_month'), $profit_last_month.$currency)
+                ->description(__('ui.profit_last_month'))
                 ->descriptionIcon('heroicon-o-rectangle-stack')
                 ->chart($profit_last_month_arr)
                 ->color('success'),
-            Stat::make('Last Year', $profit_last_year.config('filament-subscriptions.currency'))
-                ->description('Profit Last Year')
+            Stat::make(__('ui.last_year'), $profit_last_year.$currency)
+                ->description(__('ui.profit_last_year'))
                 ->descriptionIcon('heroicon-o-rectangle-stack')
                 ->chart($profit_last_year_arr)
                 ->color('success'),

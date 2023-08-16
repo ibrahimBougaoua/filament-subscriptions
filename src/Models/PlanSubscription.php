@@ -18,12 +18,14 @@ class PlanSubscription extends Model
         'slug',
         'description',
         'price',
+        'period',
         'trial_ends_at',
         'starts_at',
         'ends_at',
         'cancels_at',
         'canceled_at',
         'timezone',
+        'saw_it',
         'is_paid',
         'is_selected',
         'plan_id',
@@ -55,6 +57,11 @@ class PlanSubscription extends Model
         return $query->where('is_paid', false);
     }
 
+    public function scopeTrial($query)
+    {
+        return $query->where('period', 'Trial');
+    }
+    
     public function getCanceledAttribute(): bool
     {
         return $this->canceled();

@@ -31,11 +31,26 @@ class FeatureResource extends Resource
 
     protected static ?string $navigationIcon = 'icon-feature';
 
-    protected static ?string $navigationGroup = 'Plans';
 
-    protected static ?string $navigationLabel = 'Features';
+    public static function getLabel(): ?string
+    {
+        return __('ui.features');
+    }
 
-    protected static ?string $pluralLabel = 'Features';
+    public static function getPluralLabel(): ?string
+    {
+        return __('ui.features');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ui.features');
+    }
+
+    public static function getNavigationGroup(): string
+    {
+        return __('ui.plans');
+    }
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -45,7 +60,9 @@ class FeatureResource extends Resource
             ->schema([
                 Section::make()
                     ->schema([
-                        TextInput::make('name')->label('Name')->required()
+                        TextInput::make('name')
+                            ->label(__('ui.name'))
+                            ->required()
                             ->reactive()
                             ->afterStateUpdated(function ($state, callable $set) {
                                 $set('slug', Str::slug($state));
@@ -54,44 +71,46 @@ class FeatureResource extends Resource
                                 'md' => 6,
                             ]),
                         TextInput::make('slug')
-                            ->label('Slug')
+                            ->label(__('ui.slug'))
                             ->required()
                             ->disabled()
                             ->columnSpan([
                                 'md' => 6,
                             ]),
                         TextInput::make('value')
-                            ->label('value')
+                            ->label(__('ui.value'))
                             ->columnSpan([
                                 'md' => 6,
                             ]),
                         TextInput::make('resettable_period')
-                            ->label('resettable_period')
+                            ->label(__('ui.resettable_period'))
                             ->numeric()
                             ->default(10)
                             ->columnSpan([
                                 'md' => 6,
                             ]),
                         Select::make('resettable_interval')
-                            ->label('resettable_interval')
+                            ->label(__('ui.resettable_interval'))
                             ->options([
-                                'month' => 'Month',
-                                'day' => 'Day',
-                                'year' => 'Year',
+                                'month' => __('ui.month'),
+                                'day' => __('ui.day'),
+                                'year' => __('ui.year'),
                             ])
                             ->default('month')
                             ->columnSpan([
                                 'md' => 6,
                             ]),
-                        Select::make('status')->label('Status')
+                        Select::make('status')
+                            ->label(__('ui.status'))
                             ->options([
-                                '1' => 'Active',
-                                '0' => 'Inactive',
+                                '1' => __('ui.active'),
+                                '0' => __('ui.inactive'),
                             ])->default('1')->disablePlaceholderSelection()
                             ->columnSpan([
                                 'md' => 6,
                             ]),
-                        MarkdownEditor::make('description')->label(__('panel.description'))
+                        MarkdownEditor::make('description')
+                            ->label(__('panel.description'))
                             ->columnSpan([
                                 'md' => 12,
                             ]),
@@ -112,15 +131,16 @@ class FeatureResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image')
-                    ->label('Image')
+                    ->label(__('ui.image'))
                     ->circular(),
                 TextColumn::make('name')
-                    ->label('Name')
+                    ->label(__('ui.name'))
                     ->icon('heroicon-o-rectangle-stack')
                     ->sortable()
                     ->searchable(),
-                BadgeColumn::make('plans_count')
-                    ->label('Plans')
+                TextColumn::make('plans_count')
+                    ->badge()
+                    ->label(__('ui.plans_count'))
                     ->color(static function ($state): string {
                         if ($state === 0) {
                             return 'danger';
@@ -130,25 +150,27 @@ class FeatureResource extends Resource
                     })
                     ->counts('plans'),
                 TextColumn::make('resettable_period')
-                    ->label('Resettable Period'),
+                    ->label(__('ui.resettable_period')),
                 TextColumn::make('resettable_interval')
-                    ->label('Resettable Interval'),
+                    ->label(__('ui.resettable_interval')),
                 IconColumn::make('status')
-                    ->label('Status')->boolean()
+                    ->label(__('ui.status'))
+                    ->boolean()
                     ->trueIcon('heroicon-o-rectangle-stack')
                     ->falseIcon('heroicon-o-rectangle-stack'),
-                TextColumn::make('created_at')->label('Created at'),
+                TextColumn::make('created_at')
+                    ->label(__('ui.created_at')),
             ])
             ->filters([
                 SelectFilter::make('status')
                     ->label('Status')->options([
-                        '1' => 'Active',
-                        '0' => 'Inactive',
+                        '1' => __('ui.active'),
+                        '0' => __('ui.inactive'),
                     ]),
                 Filter::make('created_at')
                     ->label(__('panel.created_at'))->form([
-                        Forms\Components\DatePicker::make('created_from')->label('Created from'),
-                        Forms\Components\DatePicker::make('created_until')->label('Created until'),
+                        Forms\Components\DatePicker::make('created_from')->label(__('ui.created_from')),
+                        Forms\Components\DatePicker::make('created_until')->label(__('ui.created_until')),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query

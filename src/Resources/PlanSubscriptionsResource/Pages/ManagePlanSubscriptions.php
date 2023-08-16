@@ -2,7 +2,7 @@
 
 namespace IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource\Pages;
 
-use Filament\Pages\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ManageRecords;
 use IbrahimBougaoua\FilamentSubscription\Models\PlanSubscription;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource;
@@ -17,12 +17,12 @@ class ManagePlanSubscriptions extends ManageRecords
     {
         return [
             Action::make('plans')
-                ->label('Plans')
+                ->label(__('ui.plans'))
                 ->url(route('filament.admin.resources.plans.index'))
                 ->color('success')
                 ->icon('heroicon-o-rectangle-stack'),
             Action::make('features')
-                ->label('Features')
+                ->label(__('ui.features'))
                 ->url(route('filament.admin.resources.features.index'))
                 ->color('success')
                 ->icon('heroicon-o-rectangle-stack'),

@@ -2,8 +2,8 @@
 
 namespace IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource\Pages;
 
-use Filament\Pages\Actions;
-use Filament\Pages\Actions\Action;
+use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource;
 
@@ -15,7 +15,7 @@ class EditFeature extends EditRecord
     {
         return [
             Action::make('features')
-                ->label('Features')
+                ->label(__('ui.features'))
                 ->url(route('filament.admin.resources.features.index'))
                 ->color('success')
                 ->icon('heroicon-o-rectangle-stack'),

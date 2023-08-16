@@ -2,8 +2,8 @@
 
 namespace IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource\Pages;
 
-use Filament\Pages\Actions;
-use Filament\Pages\Actions\Action;
+use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use IbrahimBougaoua\FilamentSubscription\Resources\FeatureResource;
 
@@ -15,7 +15,7 @@ class ListFeatures extends ListRecords
     {
         return [
             Action::make('plans')
-                ->label('Plans')
+                ->label(__('ui.plans'))
                 ->url(route('filament.admin.resources.plans.index'))
                 ->color('success')
                 ->icon('heroicon-o-rectangle-stack'),

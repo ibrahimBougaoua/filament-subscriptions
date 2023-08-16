@@ -7,6 +7,8 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Tables\Columns\ColorColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\BadgeColumn;
@@ -22,11 +24,25 @@ class PlanSubscriptionsResource extends Resource
 
     protected static ?string $navigationIcon = 'icon-subscribed';
 
-    protected static ?string $navigationGroup = 'Plans';
+    public static function getLabel(): ?string
+    {
+        return __('ui.subscribed_user_plans');
+    }
 
-    protected static ?string $navigationLabel = 'Subscribed User Plans';
+    public static function getPluralLabel(): ?string
+    {
+        return __('ui.subscribed_user_plans');
+    }
 
-    protected static ?string $pluralLabel = 'Subscribed User Plans';
+    public static function getNavigationLabel(): string
+    {
+        return __('ui.subscribed_user_plans');
+    }
+
+    public static function getNavigationGroup(): string
+    {
+        return __('ui.plans');
+    }
 
     protected static ?string $recordTitleAttribute = 'name';
     
@@ -42,37 +58,37 @@ class PlanSubscriptionsResource extends Resource
                 Section::make()
                     ->schema([
                         TextInput::make('name')
-                            ->label('Name')
+                            ->label(__('ui.name'))
                             ->disabled()
                             ->columnSpan([
                                 'md' => 4,
                             ]),
                         TextInput::make('trial_ends_at')
-                            ->label('Trial Ends At')
+                            ->label(__('ui.trial_ends_at'))
                             ->disabled()
                             ->columnSpan([
                                 'md' => 4,
                             ]),
                         TextInput::make('starts_at')
-                            ->label('Starts At')
+                            ->label(__('ui.starts_at'))
                             ->disabled()
                             ->columnSpan([
                                 'md' => 4,
                             ]),
                         TextInput::make('ends_at')
-                            ->label('Ends At')
+                            ->label(__('ui.ends_at'))
                             ->disabled()
                             ->columnSpan([
                                 'md' => 4,
                             ]),
                         TextInput::make('cancels_at')
-                            ->label('Cancels At')
+                            ->label(__('ui.cancels_at'))
                             ->disabled()
                             ->columnSpan([
                                 'md' => 4,
                             ]),
                         TextInput::make('canceled_at')
-                            ->label('Canceled at')
+                            ->label(__('ui.canceled_at'))
                             ->disabled()
                             ->columnSpan([
                                 'md' => 4,
@@ -89,44 +105,51 @@ class PlanSubscriptionsResource extends Resource
     {
         return $table
             ->columns([
-                BadgeColumn::make('subscriber.name')
+                TextColumn::make('subscriber.name')
+                    ->badge()
                     ->colors(['secondary'])
                     ->limit(8)
-                    ->label('Subscriber'),
-                BadgeColumn::make('name')
-                    ->label('Plan')
+                    ->label(__('ui.subscriber')),
+                TextColumn::make('name')
+                    ->badge()
+                    ->label(__('ui.name'))
                     ->colors(['primary'])
                     ->searchable(),
-                BadgeColumn::make('price')
-                    ->label('Price')
+                TextColumn::make('price')
+                    ->badge()
+                    ->label(__('ui.price'))
                     ->suffix(config('filament-subscriptions.currency'))
                     ->colors(['success']),
-                BadgeColumn::make('trial_ends_at')
-                    ->label('Trial Ends At')
+                TextColumn::make('trial_ends_at')
+                    ->badge()
+                    ->label(__('ui.trial_ends_at'))
                     ->colors(['secondary']),
-                BadgeColumn::make('starts_at')
-                    ->label('Starts At')
+                TextColumn::make('starts_at')
+                    ->badge()
+                    ->label(__('ui.starts_at'))
                     ->colors(['success']),
-                BadgeColumn::make('ends_at')
-                    ->label('Ends At')
+                TextColumn::make('ends_at')
+                    ->badge()
+                    ->label(__('ui.ends_at'))
                     ->colors(['danger']),
                 ToggleColumn::make('is_paid')
-                    ->label('Unpaid/Paid'),
-                BadgeColumn::make('created_at')
-                    ->label('Created at')
+                    ->label(__('ui.unpaid_paid')),
+                TextColumn::make('created_at')
+                    ->badge()
+                    ->label(__('ui.created_at'))
                     ->colors(['success']),
             ])
             ->filters([
                 SelectFilter::make('is_paid')
-                    ->label('Unpaid/Paid')
+                    ->label(__('ui.unpaid_paid'))
                     ->options([
-                        '1' => 'Paid',
-                        '0' => 'Unpaid',
+                        '1' => __('ui.paid'),
+                        '0' => __('ui.unpaid'),
                     ]),
                 Tables\Filters\Filter::make('created_at')
                     ->label('Created at')->form([
-                        Forms\Components\DatePicker::make('created_from')->label('Created from'),
-                        Forms\Components\DatePicker::make('created_until')->label('Created until'),
+                        Forms\Components\DatePicker::make('created_from')->label(__('ui.created_from')),
+                        Forms\Components\DatePicker::make('created_until')->label(__('ui.created_until')),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
