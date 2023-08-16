@@ -11,8 +11,6 @@ use IbrahimBougaoua\FilamentSubscription\Models\Plan;
 class PlansPage extends Page
 {
     protected static ?string $navigationIcon = 'icon-plan';
-
-    protected static ?string $navigationGroup = 'Manage Subscriptions';
     
     protected static string $view = 'filament-subscriptions::pages.plans-page';
 
@@ -24,6 +22,16 @@ class PlansPage extends Page
     {
         $this->plans = Plan::get();
         $this->features = Feature::get();
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ui.manage_subscriptions');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ui.plans');
     }
 
     public function switchPlan($plan_id)

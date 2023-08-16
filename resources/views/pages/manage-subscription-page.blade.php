@@ -2,7 +2,7 @@
     <x-filament-subscriptions::plan-details 
     :name="$name" 
     :price="$price" 
-    :trial_interval="$trial_interval" 
+    :period="$period" 
     :description="$description" 
     :isTrial="$isTrial"
     :features="$features"

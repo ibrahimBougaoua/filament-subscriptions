@@ -36,7 +36,7 @@
                     'text-white' => $hasSubscribedTo,
                     'text-md' => ! $hasSubscribedTo
                     ])>
-                    Plan include :
+                    {{ __('ui.plan_include') }}
                 </p>
                 <ul class="text-sm w-full py-3">
                     @foreach ($features as $feature)
@@ -58,9 +58,9 @@
                     wire:click="switchPlan({{ $plan->id }})"
                     >
                     @if($hasSubscribedTo)
-                        Currently Active
+                        {{ __('ui.currently_active') }}
                     @else
-                        Switch Plan
+                        {{ __('ui.switch_plan') }}
                     @endif
                 </button>
             </div>

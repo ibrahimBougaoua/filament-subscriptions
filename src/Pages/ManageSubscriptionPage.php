@@ -2,15 +2,13 @@
 
 namespace IbrahimBougaoua\FilamentSubscription\Pages;
 
-use Filament\Pages\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Pages\Page;
 use IbrahimBougaoua\FilamentSubscription\Models\Feature;
 
 class ManageSubscriptionPage extends Page
 {
     protected static ?string $navigationIcon = 'icon-subscription';
-
-    protected static ?string $navigationGroup = 'Manage Subscriptions';
 
     protected static string $view = 'filament-subscriptions::pages.manage-subscription-page';
 
@@ -20,7 +18,7 @@ class ManageSubscriptionPage extends Page
 
     public $price;
 
-    public $trial_interval;
+    public $period;
 
     public $description;
 
@@ -35,6 +33,16 @@ class ManageSubscriptionPage extends Page
         $this->subscriptions = auth()->user()->planSubscriptions()->latest()->get();
     }
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('ui.manage_subscriptions');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('ui.manage_subscriptions');
+    }
+
     public function getSubscribedPlan()
     {
         $subscription = auth()->user()->planSubscriptions()->latest()->first();
@@ -42,7 +50,7 @@ class ManageSubscriptionPage extends Page
             $this->name = $subscription->name;
             $this->price = $subscription->price;
             $this->description = $subscription->plan->description;
-            $this->trial_interval = $subscription->plan->trial_interval;
+            $this->period = $subscription->plan->period;
             $this->isTrial = $subscription->isFreeSubscription();
         }
     }

@@ -19,6 +19,7 @@ class FilamentSubscriptionServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('filament-subscriptions')
+            ->hasTranslations()
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_filament_subscriptions_table')

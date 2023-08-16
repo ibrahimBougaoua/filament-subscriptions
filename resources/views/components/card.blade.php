@@ -22,7 +22,7 @@
                     'bg-gray-600' => $isTrial,
                     'bg-primary-600' => ! $isTrial,
                     ])>
-                    @if($isTrial) Free @else Paid @endif
+                    @if($isTrial) {{ __('ui.free') }} @else {{ __('ui.paid') }} @endif
                 </a>
             </div>
             <div class='w-32 h-32 rounded-full shadow-3xl flex justify-center items-center'>

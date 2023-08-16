@@ -6,6 +6,8 @@ use IbrahimBougaoua\FilamentSubscription\Models\Feature;
 use IbrahimBougaoua\FilamentSubscription\Models\Plan;
 use IbrahimBougaoua\FilamentSubscription\Models\PlanFeature;
 use IbrahimBougaoua\FilamentSubscription\Models\PlanSubscription;
+use IbrahimBougaoua\FilamentSubscription\Services\CalculateTime;
+use IbrahimBougaoua\FilamentSubscription\Services\Period;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait PlanSubscriptions
@@ -17,14 +19,21 @@ trait PlanSubscriptions
 
     public function newSubscription(Plan $plan): PlanSubscription
     {
+        $period = match($plan->period) {
+            Period::Yearly->name => new CalculateTime('Yearly'),
+            Period::Monthly->name => new CalculateTime('Monthly'),
+            Period::Trial->name => new CalculateTime('Trial'),
+            default => new CalculateTime('Trial'),
+        };
+
         return $this->planSubscriptions()->create([
             'name' => $plan->name,
             'slug' => $plan->slug,
             'description' => $plan->description,
             'price' => $plan->price,
-            'trial_ends_at' => '2023-07-15 18:55:38.000000',
-            'starts_at' => '2023-07-15 18:55:38.000000',
-            'ends_at' => '2023-07-20 18:55:38.000000',
+            'trial_ends_at' => $period->getTrialEndsAt(),
+            'starts_at' => $period->startsAt(),
+            'ends_at' => $period->endsAt(),
             'timezone' => '',
             'plan_id' => $plan->id,
         ]);
