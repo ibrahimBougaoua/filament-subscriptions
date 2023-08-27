@@ -10,6 +10,7 @@ return
     'switch_plan' => 'Switch Plan',
     'manage_subscriptions' => 'Manage Subscriptions',
     'plans' => 'Plans',
+    'features' => 'Features',
     'allready_used' => 'Allready Used',
     'the_currently_active_subscription' => 'The currently active subscription is ',
     'your_plan_subscription_has_created_successfully' => 'Your plan subscription has created successfully,it will activated after the payment process,Thanks.',
