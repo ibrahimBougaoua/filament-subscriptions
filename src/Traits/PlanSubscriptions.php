@@ -19,7 +19,7 @@ trait PlanSubscriptions
 
     public function newSubscription(Plan $plan): PlanSubscription
     {
-        $period = match($plan->period) {
+        $period = match ($plan->period) {
             Period::Yearly->name => new CalculateTime('Yearly'),
             Period::Monthly->name => new CalculateTime('Monthly'),
             Period::Trial->name => new CalculateTime('Trial'),

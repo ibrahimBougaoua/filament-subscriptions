@@ -7,13 +7,11 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Columns\ColorColumn;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
 use IbrahimBougaoua\FilamentSubscription\Models\PlanSubscription;
 use IbrahimBougaoua\FilamentSubscription\Resources\PlanSubscriptionsResource\Pages;
 use Illuminate\Database\Eloquent\Builder;
@@ -45,7 +43,7 @@ class PlanSubscriptionsResource extends Resource
     }
 
     protected static ?string $recordTitleAttribute = 'name';
-    
+
     public static function canCreate(): bool
     {
         return false;

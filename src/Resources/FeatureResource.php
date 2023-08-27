@@ -10,14 +10,13 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
 use IbrahimBougaoua\FilamentSubscription\Actions\DownStepAction;
 use IbrahimBougaoua\FilamentSubscription\Actions\UpStepAction;
 use IbrahimBougaoua\FilamentSubscription\Models\Feature;
@@ -30,7 +29,6 @@ class FeatureResource extends Resource
     protected static ?string $model = Feature::class;
 
     protected static ?string $navigationIcon = 'icon-feature';
-
 
     public static function getLabel(): ?string
     {

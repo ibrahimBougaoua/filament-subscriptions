@@ -1,6 +1,6 @@
 <?php
 
-return 
+return
 [
     'free' => 'Free',
     'paid' => 'Paid',
