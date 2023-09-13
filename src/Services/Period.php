@@ -2,7 +2,8 @@
 
 namespace IbrahimBougaoua\FilamentSubscription\Services;
 
-enum Period {
+enum Period
+{
     case Yearly;
     case Monthly;
     case Trial;

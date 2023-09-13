@@ -2,8 +2,8 @@
 
 namespace IbrahimBougaoua\FilamentSubscription\Pages;
 
-use Filament\Notifications\Notification;
 use Filament\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use IbrahimBougaoua\FilamentSubscription\Models\Feature;
 use IbrahimBougaoua\FilamentSubscription\Models\Plan;
@@ -11,16 +11,26 @@ use IbrahimBougaoua\FilamentSubscription\Models\Plan;
 class PlansPage extends Page
 {
     protected static ?string $navigationIcon = 'icon-plan';
-    
+
     protected static string $view = 'filament-subscriptions::pages.plans-page';
 
-    public $plans;
+    public $plans = [];
 
-    public $features;
+    public $features = [];
 
     public function mount()
     {
+        $this->getAllPlans();
+        $this->getAllFeatures();
+    }
+
+    public function getAllPlans()
+    {
         $this->plans = Plan::get();
+    }
+
+    public function getAllFeatures()
+    {
         $this->features = Feature::get();
     }
 
@@ -44,7 +54,7 @@ class PlansPage extends Page
         $subscription = auth()->user()->newSubscription($plan);
 
         Notification::make()
-            ->title(__('ui.switched_to') . ' '.$subscription->name. ' ' . __('ui.plan_successfully'))
+            ->title(__('ui.switched_to').' '.$subscription->name.' '.__('ui.plan_successfully'))
             ->success()
             ->send();
 

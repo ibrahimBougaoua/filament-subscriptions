@@ -1,6 +1,7 @@
 <?php
 
 namespace IbrahimBougaoua\FilamentSubscription\Services;
+
 use Carbon\Carbon;
 
 class CalculateTime
@@ -19,7 +20,8 @@ class CalculateTime
 
     public $ends_at;
 
-    public function __construct($period) {
+    public function __construct($period)
+    {
         $this->period = $period;
     }
 
@@ -50,12 +52,13 @@ class CalculateTime
 
     public function endsAt()
     {
-        if($this->period == Period::Yearly->name)
+        if ($this->period == Period::Yearly->name) {
             return $this->ends_at = Carbon::now()->addYears($this->number_years);
-        elseif($this->period == Period::Monthly->name)
+        } elseif ($this->period == Period::Monthly->name) {
             return $this->ends_at = $this->ends_at ?? Carbon::now()->addMonths($this->number_months);
-        else
+        } else {
             return $this->startsAt();
+        }
     }
 
     public function getTrialEndsAt()

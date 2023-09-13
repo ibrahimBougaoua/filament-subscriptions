@@ -20,7 +20,7 @@ class ManageSubscriptionPage extends Page
 
     public $message;
 
-    public $subscriptions;
+    public $subscriptions = [];
 
     public $name;
 
@@ -39,7 +39,17 @@ class ManageSubscriptionPage extends Page
     public function mount()
     {
         $this->getSubscribedPlan();
+        $this->getAllFeatures();
+        $this->getAllSubscriptions();
+    }
+
+    public function getAllFeatures()
+    {
         $this->features = Feature::all();
+    }
+
+    public function getAllSubscriptions()
+    {
         $this->subscriptions = auth()->user()->planSubscriptions()->latest()->get();
     }
 
@@ -65,13 +75,15 @@ class ManageSubscriptionPage extends Page
             $this->isTrial = $subscription->isFreeSubscription();
             $this->isPaid = $subscription->is_paid;
 
-            if($subscription->saw_it)
+            if ($subscription->saw_it) {
                 $this->saw_it = true;
+            }
 
-            if($this->isPaid || $this->isTrial)
-                $this->message = __('ui.the_currently_active_subscription') . ' ' . $this->name;
-            else
+            if ($this->isPaid || $this->isTrial) {
+                $this->message = __('ui.the_currently_active_subscription').' '.$this->name;
+            } else {
                 $this->message = __('ui.your_plan_subscription_has_created_successfully');
+            }
         }
     }
 

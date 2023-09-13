@@ -61,7 +61,7 @@ class PlanSubscription extends Model
     {
         return $query->where('period', 'Trial');
     }
-    
+
     public function getCanceledAttribute(): bool
     {
         return $this->canceled();
